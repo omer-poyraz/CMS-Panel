@@ -4,6 +4,9 @@ import { Edit2, Trash2 } from "react-feather";
 import { HeaderDeleteService, HeaderGetService, SeoGetService, SeoDeleteService, UserGetService, UserDeleteService } from "../service";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserId } from "../redux/slices/userIdSlice";
+import { fetchSeoId } from "../redux/slices/seoIdSlice";
+import { fetchSeoDelete } from "../redux/slices/seoDeleteSlice";
+import { fetchSeos } from "../redux/slices/seosSlice";
 
 export const MenuColumns = () => {
     const lng = useSelector((state) => state.lang.lang)
@@ -16,28 +19,28 @@ export const MenuColumns = () => {
             width: 50
         },
         {
-            title: "ID",
+            title: <span className="text-s">ID</span>,
             key: "headerID",
-            render: (e) => e.headerID,
+            render: (e) => <span className="text-s">e.headerID</span>,
             width: 50
         },
         {
-            title: "Başlık",
+            title: <span className="text-s">Başlık</span>,
             key: "titleTR",
-            render: (e) => e[`title${lng}`],
+            render: (e) => <span className="text-s">e[`title${lng}`]</span>,
         },
         {
-            title: "URL",
+            title: <span className="text-s">URL</span>,
             key: "urlTR",
-            render: (e) => e[`title${lng}`],
+            render: (e) => <span className="text-s">e[`title${lng}`]</span>,
         },
         {
-            title: "İşlemler",
+            title: <span className="text-s">İşlemler</span>,
             render: (e) => (
                 <div className='d-flex justify-content-start'>
                     <div className='ml-2'>
                         <Tooltip title="Düzenle">
-                            <Button2 className='border-warning text-warning' icon={<Edit2 size={20} className='text-warning' />} onClick={() => HeaderGetService(e.headerID)} />
+                            <Button2 className='border-warning bg-transparent text-warning' icon={<Edit2 size={20} className='text-warning' />} onClick={() => HeaderGetService(e.headerID)} />
                         </Tooltip>
                     </div>
                     <div className='ml-2'>
@@ -48,7 +51,7 @@ export const MenuColumns = () => {
                             cancelText="Hayır"
                         >
                             <Tooltip title="Sil">
-                                <Button2 icon={<Trash2 size={20} className='text-danger' />} danger />
+                                <Button2 className="bg-transparent" icon={<Trash2 size={20} className='text-danger' />} danger />
                             </Tooltip>
                         </Popconfirm>
                     </div>
@@ -61,42 +64,43 @@ export const MenuColumns = () => {
 
 export const SeoColumns = () => {
     const lng = useSelector((state) => state.lang.lang)
+    const dispatch = useDispatch()
 
     return [
         {
-            title: "ID",
+            title: <span className="text-s">ID</span>,
             key: "seoID",
-            render: (e) => e.seoID,
+            render: (e) => <span className="text-s">{e.seoID}</span>,
             width: 50
         },
         {
-            title: "Başlık",
+            title: <span className="text-s">Başlık</span>,
             key: "titleTR",
-            render: (e) => e[`title${lng}`],
+            render: (e) => <span className="text-s">{e[`title${lng}`]}</span>,
         },
         {
-            title: "Anahtar Kelimeler",
+            title: <span className="text-s">Anahtar Kelimeler</span>,
             key: "keywordsTR",
-            render: (e) => e[`keywords${lng}`],
+            render: (e) => <span className="text-s">{e[`keywords${lng}`]}</span>,
         },
         {
-            title: "İşlemler",
+            title: <span className="text-s">İşlemler</span>,
             render: (e) => (
                 <div className='d-flex justify-content-start'>
                     <div className='ml-2'>
                         <Tooltip title="Düzenle">
-                            <Button2 className='border-warning text-warning' icon={<Edit2 size={20} className='text-warning' />} onClick={() => SeoGetService(e.seoID)} />
+                            <Button2 className='border-warning bg-transparent text-warning' icon={<Edit2 size={20} className='text-warning' />} onClick={() => dispatch(fetchSeoId({ id: e.seoID }))} />
                         </Tooltip>
                     </div>
                     <div className='ml-2'>
                         <Popconfirm
                             title="Bu içeriği istediğinizden emin misiniz?"
-                            onConfirm={() => SeoDeleteService(e.seoID)}
+                            onConfirm={async () => { await dispatch(fetchSeoDelete({ id: e.seoID })); await dispatch(fetchSeos()) }}
                             okText="Evet"
                             cancelText="Hayır"
                         >
                             <Tooltip title="Sil">
-                                <Button2 icon={<Trash2 size={20} className='text-danger' />} danger />
+                                <Button2 className="bg-transparent" icon={<Trash2 size={20} className='text-danger' />} danger />
                             </Tooltip>
                         </Popconfirm>
                     </div>
@@ -117,27 +121,27 @@ export const UserColumns = () => {
             width: 50
         },
         {
-            title: "İsim Soyisim",
+            title: <span className="text-s">İsim Soyisim</span>,
             key: "firstName",
-            render: (e) => `${e.firstName} ${e.lastName}`,
+            render: (e) => <span className="text-s">{e.firstName} {e.lastName}</span>,
         },
         {
-            title: "E-Mail",
+            title: <span className="text-s">E-Mail</span>,
             key: "email",
-            render: (e) => e.email,
+            render: (e) => <span className="text-s">{e.email}</span>,
         },
         {
-            title: "Telefon",
+            title: <span className="text-s">Telefon</span>,
             key: "phoneNumber",
-            render: (e) => e.phoneNumber,
+            render: (e) => <span className="text-s">{e.phoneNumber}</span>,
         },
         {
-            title: "İşlemler",
+            title: <span className="text-s">İşlemler</span>,
             render: (e) => (
                 <div className='d-flex justify-content-start'>
                     <div className='ml-2'>
                         <Tooltip title="Düzenle">
-                            <Button2 className='border-warning text-warning' icon={<Edit2 size={20} className='text-warning' />} onClick={() => dispatch(fetchUserId({ id: e.userId }))} />
+                            <Button2 className='border-warning bg-transparent text-warning' icon={<Edit2 size={20} className='text-warning' />} onClick={() => dispatch(fetchUserId({ id: e.userId }))} />
                         </Tooltip>
                     </div>
                     <div className='ml-2'>
@@ -146,9 +150,63 @@ export const UserColumns = () => {
                             onConfirm={() => UserDeleteService(e.userId)}
                             okText="Evet"
                             cancelText="Hayır"
+                            okButtonProps={{ className: 'primary border-0' }}
                         >
                             <Tooltip title="Sil">
-                                <Button2 icon={<Trash2 size={20} className='text-danger' />} danger />
+                                <Button2 className="bg-transparent" icon={<Trash2 size={20} className='text-danger' />} danger />
+                            </Tooltip>
+                        </Popconfirm>
+                    </div>
+                </div>
+            )
+        }
+    ]
+}
+
+export const OrderColumns = () => {
+    const dispatch = useDispatch()
+
+    return [
+        {
+            title: "",
+            key: "orderID",
+            render: (e) => <div className='table-logo shadow' style={{ backgroundColor: randomColor() }}>{e.firstName[0]}</div>,
+            width: 50
+        },
+        {
+            title: <span className="text-s">ID</span>,
+            key: "orderID",
+            render: (e) => <span className="text-s">{e.orderID}</span>,
+        },
+        {
+            title: <span className="text-s">Kod</span>,
+            key: "email",
+            render: (e) => <span className="text-s">{e.code}</span>,
+        },
+        {
+            title: <span className="text-s">Müşteri</span>,
+            key: "client",
+            render: (e) => <span className="text-s">{e.client}</span>,
+        },
+        {
+            title: <span className="text-s">İşlemler</span>,
+            render: (e) => (
+                <div className='d-flex justify-content-start'>
+                    <div className='ml-2'>
+                        <Tooltip title="Düzenle">
+                            <Button2 className='border-warning bg-transparent text-warning' icon={<Edit2 size={20} className='text-warning' />} onClick={() => dispatch(fetchUserId({ id: e.userId }))} />
+                        </Tooltip>
+                    </div>
+                    <div className='ml-2'>
+                        <Popconfirm
+                            title="Bu kullanıcıyı istediğinizden emin misiniz?"
+                            onConfirm={() => UserDeleteService(e.userId)}
+                            okText="Evet"
+                            cancelText="Hayır"
+                            okButtonProps={{ className: 'primary border-0' }}
+                        >
+                            <Tooltip title="Sil">
+                                <Button2 className="bg-transparent" icon={<Trash2 size={20} className='text-danger' />} danger />
                             </Tooltip>
                         </Popconfirm>
                     </div>

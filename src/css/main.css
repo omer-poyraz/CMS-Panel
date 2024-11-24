@@ -93,8 +93,13 @@ body {
 }
 
 .card2 h3,
-.card2 h4 {
+.card2 h4,
+.card2 h5 {
     color: #cfcde4;
+}
+
+.card .subtitle {
+    margin-top: -5px;
 }
 
 .card span,
@@ -118,6 +123,93 @@ body {
 .card2 .ant-table-tbody {
     background-color: #41455d !important;
     border: none !important;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 2px;
+}
+
+.card2:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-tbody>tr>th,
+.card2:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-tbody>tr>td {
+    border-bottom: 1px solid #76778e;
+}
+
+.card2 .anticon svg {
+    color: #d4e6d1;
+}
+
+:where(.css-dev-only-do-not-override-49qm).ant-pagination .ant-pagination-item-active {
+    border-color: #7367f0;
+    background-color: transparent;
+}
+
+.card2:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-thead>tr>th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before,
+.card2:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-thead>tr>td:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
+    background-color: #797d93;
+}
+
+.card2:where(.css-dev-only-do-not-override-49qm).ant-empty-normal .ant-empty-description {
+    color: white !important;
+}
+
+.card2:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-tbody>tr.ant-table-placeholder:hover>th,
+.card2:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-tbody>tr.ant-table-placeholder:hover>td,
+.card2:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-tbody>tr.ant-table-placeholder {
+    background-color: #4c5065;
+    color: #797d93;
+}
+
+.card:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-tbody>tr.ant-table-placeholder:hover>th,
+.card:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-tbody>tr.ant-table-placeholder:hover>td,
+.card:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-tbody>tr.ant-table-placeholder {
+    background-color: transparent;
+    color: #797d93;
+}
+
+.card2:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-tbody>tr>th,
+.card2:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-tbody>tr>td {
+    border: none;
+}
+
+.card2 .form-control {
+    border: 0.5px solid #c1beea;
+    color: #bbb9d7;
+}
+
+.card2 .input-element svg:first-child {
+    color: #c1beea;
+}
+
+.card label {
+    font-size: 14px;
+}
+
+.dropdown-item {
+    color: #76778e;
+    font-weight: 300;
+    font-size: 14px;
+}
+
+.local-message {
+    color: #797d93;
+    font-weight: 300;
+    font-size: 13px;
+}
+
+.card2:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-tbody .ant-table-row>.ant-table-cell-row-hover {
+    background-color: #4c5065;
+}
+
+.card2.card2:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-tbody .ant-table-row>.ant-table-cell-row-hover:first-child {
+    border-radius: 10px 0 0 10px;
+}
+
+.card2.card2:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-tbody .ant-table-row>.ant-table-cell-row-hover:last-child {
+    border-radius: 0 10px 10px 0;
+}
+
+.table-container {
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 .text-primary {
@@ -178,7 +270,7 @@ input {
 }
 
 .input-element input {
-    padding-left: 40px;
+    padding-left: 35px;
 }
 
 .north {
@@ -370,8 +462,7 @@ input {
 
 /* Setting */
 .setting .row img {
-    height: 100px;
-    width: 100px;
+    width: 100%;
     border-radius: 10px;
 }
 

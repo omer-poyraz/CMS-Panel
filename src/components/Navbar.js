@@ -1,4 +1,4 @@
-import { faFileText, faGear, faGlobe, faGlobeAsia, faImage, faSort, faStore, faUserCircle, faX } from '@fortawesome/free-solid-svg-icons'
+import { faFeather, faFileText, faGear, faGlobe, faGlobeAsia, faImage, faSlash, faSort, faStore, faUserCircle, faX } from '@fortawesome/free-solid-svg-icons'
 import { faChartBar } from '@fortawesome/free-solid-svg-icons/faChartBar'
 import { faList } from '@fortawesome/free-solid-svg-icons/faList'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -68,6 +68,10 @@ const Navbar = () => {
                 <a href="https://www.google.com" target='_blank' className="item">
                     <div><FontAwesomeIcon icon={faGlobeAsia} /></div>
                     <div className='ml-2'><span>Siteye Git</span></div>
+                </a>
+                <a href="https://www.google.com" target='_blank' className="item">
+                    <div><FontAwesomeIcon icon={faFeather} /></div>
+                    <div className='ml-2'><span>North Soft</span></div>
                 </a>
             </motion.div>
         </div> : null

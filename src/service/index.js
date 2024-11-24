@@ -1,5 +1,5 @@
 import axios from "axios";
-import { HEADERDELETEURL, HEADERGETALLURL, HEADERGETURL, LOGINURL, SEODELETEURL, SEOGETALLURL, SEOGETURL, USERCREATEURL, USERDELETEURL, USERGETALLURL, USERGETURL, USERUPDATEURL } from "../api";
+import { HEADERDELETEURL, HEADERGETALLURL, HEADERGETURL, LOGINURL, SEOCREATEURL, SEODELETEURL, SEOGETALLURL, SEOGETURL, SEOUPDATEURL, USERCREATEURL, USERDELETEURL, USERGETALLURL, USERGETURL, USERUPDATEURL } from "../api";
 import { toast } from "react-toastify";
 
 const token = localStorage.getItem("auth") !== undefined && localStorage.getItem("auth") !== null ? JSON.parse(localStorage.getItem("auth")).accessToken : null
@@ -49,6 +49,18 @@ export async function SeoGetAllService() {
 
 export async function SeoGetService(id) {
     return await axios.get(`${SEOGETURL}/${id}`)
+        .then(res => res.data)
+        .catch(er => toast.error(er))
+}
+
+export async function SeoCreateService(data) {
+    return await axios.post(SEOCREATEURL, data, header)
+        .then(res => res.data)
+        .catch(er => toast.error(er))
+}
+
+export async function SeoUpdateService(data) {
+    return await axios.put(SEOUPDATEURL, data, header)
         .then(res => res.data)
         .catch(er => toast.error(er))
 }

@@ -28,3 +28,5 @@ export const splitF = (txt, len) => {
         return "";
     }
 }
+
+export const LocaleMessage = { emptyText: <div className="local-message">Veri Bulunamadı!</div>, };

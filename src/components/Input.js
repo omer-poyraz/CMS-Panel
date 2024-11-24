@@ -1,27 +1,40 @@
-import React from 'react'
-import { Container, FormGroup, Input, Label } from 'reactstrap'
+import React from 'react';
+import { Controller } from 'react-hook-form';
+import { FormGroup, Input, Label, Container } from 'reactstrap';
 
-const InputElement = ({ label, icon, type, placeholder, name, value, defaultValue, onchange, suffix }) => {
+const InputElement = ({ control, errors, label, icon, type, placeholder, id, suffix, value }) => {
     return (
         <FormGroup>
-            <Label className='text-secondary mb-0'>{label}</Label>
-            <Container className='position-relative p-0 m-0'>
-                <div className='input-element'>
-                    {icon}
-                    <Input
-                        className='bg-transparent'
-                        name={name}
-                        type={type}
-                        placeholder={placeholder}
-                        value={value}
-                        defaultValue={defaultValue}
-                        onChange={onchange}
-                    />
-                    {suffix}
-                </div>
-            </Container>
+            <Label className="text-secondary mb-0" htmlFor={id}>
+                {label}
+            </Label>
+            <Controller
+                name={id}
+                control={control}
+                render={({ field }) => {
+                    return (
+                        <Container className="position-relative p-0 m-0">
+                            <div className="input-element">
+                                {icon}
+                                <Input
+                                    {...field}
+                                    id={id}
+                                    value={field.value || value || ""}
+                                    className={errors[id] ? "bg-transparent border-danger border-1" : "bg-transparent"}
+                                    type={type}
+                                    placeholder={placeholder}
+                                />
+                                {suffix}
+                            </div>
+                        </Container>
+                    );
+                }}
+            />
+            {errors[id] && (
+                <small className="ml-1 text-danger">{errors[id].message}</small>
+            )}
         </FormGroup>
-    )
-}
+    );
+};
 
-export default InputElement
+export default InputElement;

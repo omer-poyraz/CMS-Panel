@@ -14,25 +14,25 @@ const Upsert = () => {
     return (
         <Card className={CardModel(theme)}>
             <CardHeader className='bg-transparent border-0'>
-                <div><h3>Menü {formData.id ? "Güncelle" : "Ekle"}</h3></div>
-                <div className=''><span className='text-s'>Menü elemanlarını ekleyebilir veya düzenleyebilirsiniz.</span></div>
+                <div><h5>Menü {formData.id ? "Güncelle" : "Ekle"}</h5></div>
+                <div className='subtitle'><span className='text-s'>Menü elemanlarını ekleyebilir veya düzenleyebilirsiniz.</span></div>
             </CardHeader>
             <CardBody>
                 <Row>
-                    <Col md={6} className='mb-3'>
+                    <Col md={6}>
                         <InputElement
                             label={`Başlık - ${lng}`}
                             type="text"
-                            icon={<FontAwesomeIcon icon={faList} color='#ccc' size='1x' />}
+                            icon={<FontAwesomeIcon icon={faList} color='#c1beea' size='1x' />}
                             value={formData[`Title${lng}`]}
                             onchange={(e) => setFormData(prev => ({ ...prev, [`Title${lng}`]: e.target.value }))}
                         />
                     </Col>
-                    <Col md={6} className='mb-3'>
+                    <Col md={6}>
                         <InputElement
                             label={`URL - ${lng}`}
                             type="text"
-                            icon={<FontAwesomeIcon icon={faGlobeEurope} color='#ccc' size='1x' />}
+                            icon={<FontAwesomeIcon icon={faGlobeEurope} color='#c1beea' size='1x' />}
                             value={formData[`Url${lng}`]}
                             onchange={(e) => setFormData(prev => ({ ...prev, [`Url${lng}`]: e.target.value }))}
                         />

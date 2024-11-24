@@ -11,8 +11,8 @@ const ClickCart = ({ title, description, data }) => {
     return (
         <Card className={CardModel(theme)}>
             <CardHeader className='bg-transparent border-0'>
-                <div><h4>{title}</h4></div>
-                <div><span className='text-secondary'>{description}</span></div>
+                <div><h5>{title}</h5></div>
+                <div className='subtitle'><span className='text-secondary'>{description}</span></div>
             </CardHeader>
             <CardBody>
                 <ReactApexChart
