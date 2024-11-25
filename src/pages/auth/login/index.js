@@ -1,33 +1,24 @@
 import React, { useState } from 'react'
-import { Button, Col, Container, Label, Row } from 'reactstrap'
+import { Button, Col, Container, Form, Label, Row } from 'reactstrap'
 import LgBg from '../../../images/login.png'
 import { Eye, EyeOff, Lock, User } from 'react-feather'
-import { useNavigate } from 'react-router-dom'
 import InputElement from '../../../components/Input'
+import { yupResolver } from "@hookform/resolvers/yup"
 import { useDispatch } from 'react-redux'
 import { fetchLogin } from '../../../redux/slices/loginSlice'
-import { toast } from 'react-toastify'
+import { useForm } from 'react-hook-form'
+import { AuthSchema } from '../../../utilities/Schemas'
 
 const LoginPage = () => {
-    const dispatch = useDispatch()
-    const navigation = useNavigate()
-    const [load, setLoad] = useState(false)
+    const { handleSubmit, formState: { errors }, control } = useForm({ resolver: yupResolver(AuthSchema), })
     const [isEye, setIsEye] = useState(false)
-    const [formData, setFormData] = useState({ username: "", password: "" })
+    const [load, setLoad] = useState(false)
+    const dispatch = useDispatch()
 
-    const loginData = async () => {
+    const onSubmit = async (e) => {
         setLoad(true)
-        var data = await dispatch(fetchLogin({ username: formData.username, password: formData.password }))
-        if (data.payload.userId) {
-            localStorage.setItem("auth", JSON.stringify(data.payload))
-            toast.success(`Hoşgeldin ${data.payload.name}.`)
-            setTimeout(() => {
-                navigation("/")
-            }, 1000);
-        }
-        setTimeout(() => {
-            setLoad(false)
-        }, 1000);
+        await dispatch(fetchLogin({ username: e.username, password: e.password }))
+        setTimeout(() => { setLoad(false) }, 1000);
     }
 
     return (
@@ -42,27 +33,29 @@ const LoginPage = () => {
                     <Container className='p-0 m-0'>
                         <h3>North Panel'e Hoşgeldiniz</h3>
                         <Label className='text-secondary'>Eğer bir hesabınız varsa lütfen giriş yapınız. Bir hesabınız yoksa müşteri temsilcinizle irtibata geçiniz.</Label>
-                        <div className='mt-4'>
+                        <Form onSubmit={handleSubmit(onSubmit)} className='mt-4'>
                             <InputElement
-                                label="Kullanıcı adı"
+                                id="username"
                                 type="text"
-                                icon={<User color='#ccc' size={20} />}
-                                onchange={(e) => setFormData(prev => ({ ...prev, username: e.target.value }))}
-                            />
+                                control={control}
+                                errors={errors}
+                                label="Kullanıcı Adı"
+                                icon={<User color="#c1beea" size={18} />} />
                             <InputElement
-                                label="Şifre"
-                                icon={<Lock color='#ccc' size={20} />}
+                                id="password"
                                 type={isEye ? 'text' : 'password'}
+                                control={control}
+                                errors={errors}
+                                label="Şifre"
                                 suffix={isEye ? <Eye color='grey' size={20} onClick={() => setIsEye(!isEye)} /> :
                                     <EyeOff color='grey' size={20} onClick={() => setIsEye(!isEye)} />}
-                                onchange={(e) => setFormData(prev => ({ ...prev, password: e.target.value }))}
-                            />
-                            <Button className='w-100 primary rounded-l border-0 py-2 mt-3' onClick={loginData} disabled={load}>Giriş Yap</Button>
-                        </div>
+                                icon={<Lock color='#ccc' size={20} />} />
+                            <Button className='w-100 primary rounded-l border-0 py-2 mt-3' disabled={load}>Giriş Yap</Button>
+                        </Form>
                     </Container>
                 </Col>
             </Row>
-        </Container>
+        </Container >
     )
 }
 

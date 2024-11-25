@@ -4,12 +4,17 @@ import { toast } from 'react-toastify';
 
 export const fetchUserEdit = createAsyncThunk(
     'userEdit/fetchUserEdit',
-    async ({ id, firstName, lastName, userName, email, phoneNumber, password }) => {
+    async ({ data }) => {
         var response;
         const roles = []
         roles.push("Admin")
-        if (id) response = await UserUpdateService(id, firstName, lastName, userName, email, phoneNumber)
-        else response = await UserCreateService(firstName, lastName, userName, email, phoneNumber, password, roles)
+        if (data.userId) response = await UserUpdateService(data)
+        else {
+            console.log(data)
+            data["roles"] = roles
+            console.log(data)
+            response = await UserCreateService(data)
+        }
         return response.result;
     }
 );

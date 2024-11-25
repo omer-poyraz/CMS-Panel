@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { LoginService } from '../../service';
+import { toast } from 'react-toastify';
 
 export const fetchLogin = createAsyncThunk(
     'login/fetchLogin',
@@ -22,8 +23,15 @@ const loginSlice = createSlice({
                 state.status = 'loading';
             })
             .addCase(fetchLogin.fulfilled, (state, action) => {
-                state.status = 'succeeded';
-                state.data = action.payload;
+                if (action.payload.userId) {
+                    state.status = 'succeeded';
+                    state.data = action.payload;
+                    localStorage.setItem("auth", JSON.stringify(action.payload))
+                    toast.success(`Hoşgeldin ${action.payload.name}.`)
+                    setTimeout(() => {
+                        window.location.href = "/"
+                    }, 1000);
+                }
             })
             .addCase(fetchLogin.rejected, (state) => {
                 state.status = 'failed';

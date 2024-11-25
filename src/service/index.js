@@ -86,14 +86,14 @@ export async function UserGetService(id) {
         .catch(er => toast.error(er))
 }
 
-export async function UserCreateService(firstName, lastName, userName, email, phoneNumber, password, roles) {
-    return await axios.post(USERCREATEURL, { "firstName": firstName, "lastName": lastName, "userName": userName, "email": email, "phoneNumber": phoneNumber, "password": password, "roles": roles })
+export async function UserCreateService(data) {
+    return await axios.post(USERCREATEURL, data)
         .then(res => res.data)
         .catch(er => toast.error(er))
 }
 
-export async function UserUpdateService(id, firstName, lastName, userName, email, phoneNumber) {
-    return await axios.put(`${USERUPDATEURL}/${id}`, { "firstName": firstName, "lastName": lastName, "userName": userName, "email": email, "phoneNumber": phoneNumber, "userId": id }, header)
+export async function UserUpdateService(data) {
+    return await axios.put(USERUPDATEURL, data, header)
         .then(res => res.data)
         .catch(er => toast.error(er))
 }

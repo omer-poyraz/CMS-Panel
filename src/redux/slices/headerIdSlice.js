@@ -1,16 +1,16 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { UserGetService } from '../../service';
+import { HeaderGetService } from '../../service';
 
-export const fetchUserId = createAsyncThunk(
-    'userId/fetchUserId',
+export const fetchHeaderId = createAsyncThunk(
+    'headerId/fetchHeaderId',
     async ({ id }) => {
-        const response = await UserGetService(id)
+        const response = await HeaderGetService(id)
         return response.result;
     }
 );
 
-const userIdSlice = createSlice({
-    name: 'userId',
+const headerIdSlice = createSlice({
+    name: 'headerId',
     initialState: {
         data: null,
         status: 'idle',
@@ -18,17 +18,17 @@ const userIdSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(fetchUserId.pending, (state) => {
+            .addCase(fetchHeaderId.pending, (state) => {
                 state.status = 'loading';
             })
-            .addCase(fetchUserId.fulfilled, (state, action) => {
+            .addCase(fetchHeaderId.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 state.data = action.payload;
             })
-            .addCase(fetchUserId.rejected, (state) => {
+            .addCase(fetchHeaderId.rejected, (state) => {
                 state.status = 'failed';
             });
     },
 });
 
-export default userIdSlice.reducer;
+export default headerIdSlice.reducer;

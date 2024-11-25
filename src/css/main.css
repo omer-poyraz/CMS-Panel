@@ -248,6 +248,24 @@ input {
     border-radius: 10px !important;
 }
 
+:where(.css-dev-only-do-not-override-49qm).ant-select-outlined:not(.ant-select-customize-input) .ant-select-selector {
+    border-radius: 10px;
+    position: relative;
+    background-color: transparent;
+}
+
+:where(.css-dev-only-do-not-override-49qm).ant-select .ant-select-arrow .anticon>svg {
+    display: none;
+}
+
+:where(.css-dev-only-do-not-override-49qm).ant-select-outlined:not(.ant-select-customize-input) .ant-select-selector {
+    border: 0.5px solid #bbb9d7;
+}
+
+:where(.css-dev-only-do-not-override-49qm).ant-select-outlined:not(.ant-select-disabled):not(.ant-select-customize-input):not(.ant-pagination-size-changer):hover .ant-select-selector {
+    border-color: #7367f0;
+}
+
 .primary {
     background: linear-gradient(270deg, rgba(115, 103, 240, 0.7) 0%, #7367f0 100%) !important;
 }
@@ -261,6 +279,7 @@ input {
     top: 10px;
     font-size: 10px;
     left: 10px;
+    z-index: 1;
 }
 
 .input-element svg:last-child {

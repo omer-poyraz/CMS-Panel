@@ -1,15 +1,20 @@
 import { Popconfirm, Tooltip, Button as Button2 } from "antd";
 import { randomColor } from "./General";
 import { Edit2, Trash2 } from "react-feather";
-import { HeaderDeleteService, HeaderGetService, SeoGetService, SeoDeleteService, UserGetService, UserDeleteService } from "../service";
+import { UserDeleteService } from "../service";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserId } from "../redux/slices/userIdSlice";
 import { fetchSeoId } from "../redux/slices/seoIdSlice";
 import { fetchSeoDelete } from "../redux/slices/seoDeleteSlice";
 import { fetchSeos } from "../redux/slices/seosSlice";
+import { fetchHeaderId } from "../redux/slices/headerIdSlice";
+import { fetchHeaderDelete } from "../redux/slices/headerDeleteSlice";
+import { fetchUserDelete } from "../redux/slices/userDeleteSlice";
+import { fetchUsers } from "../redux/slices/usersSlice";
 
 export const MenuColumns = () => {
     const lng = useSelector((state) => state.lang.lang)
+    const dispatch = useDispatch()
 
     return [
         {
@@ -40,13 +45,13 @@ export const MenuColumns = () => {
                 <div className='d-flex justify-content-start'>
                     <div className='ml-2'>
                         <Tooltip title="Düzenle">
-                            <Button2 className='border-warning bg-transparent text-warning' icon={<Edit2 size={20} className='text-warning' />} onClick={() => HeaderGetService(e.headerID)} />
+                            <Button2 className='border-warning bg-transparent text-warning' icon={<Edit2 size={20} className='text-warning' />} onClick={() => dispatch(fetchHeaderId(e.headerID))} />
                         </Tooltip>
                     </div>
                     <div className='ml-2'>
                         <Popconfirm
                             title="Bu içeriği istediğinizden emin misiniz?"
-                            onConfirm={() => HeaderDeleteService(e.headerID)}
+                            onConfirm={() => dispatch(fetchHeaderDelete(e.headerID))}
                             okText="Evet"
                             cancelText="Hayır"
                         >
@@ -147,7 +152,7 @@ export const UserColumns = () => {
                     <div className='ml-2'>
                         <Popconfirm
                             title="Bu kullanıcıyı istediğinizden emin misiniz?"
-                            onConfirm={() => UserDeleteService(e.userId)}
+                            onConfirm={() => { dispatch(fetchUserDelete({ id: e.userId })); dispatch(fetchUsers()) }}
                             okText="Evet"
                             cancelText="Hayır"
                             okButtonProps={{ className: 'primary border-0' }}

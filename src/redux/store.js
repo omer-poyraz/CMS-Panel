@@ -8,7 +8,10 @@ import userIdSlice from "./slices/userIdSlice";
 import usersSlice from "./slices/usersSlice";
 import userUpdateSlice from "./slices/userUpdateSlice";
 import userEditSlice from "./slices/userEditSlice";
+import userDeleteSlice from "./slices/userDeleteSlice";
 import headersSlice from "./slices/headersSlice";
+import headerIdSlice from "./slices/headerIdSlice";
+import headerDeleteSlice from "./slices/headerDeleteSlice";
 import seosSlice from "./slices/seosSlice";
 import seoIdSlice from "./slices/seoIdSlice";
 import seoAddSlice from "./slices/seoAddSlice";
@@ -26,7 +29,10 @@ export const Store = configureStore({
         users: usersSlice,
         userUpdate: userUpdateSlice,
         userEdit: userEditSlice,
+        userDelete: userDeleteSlice,
         headers: headersSlice,
+        headerId: headerIdSlice,
+        headerDelete: headerDeleteSlice,
         seos: seosSlice,
         seoId: seoIdSlice,
         seoAdd: seoAddSlice,
