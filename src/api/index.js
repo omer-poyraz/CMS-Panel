@@ -1,4 +1,4 @@
-export const URL = "http://localhost:5134/api"
+export const URL = "https://localhost:7175/api"
 
 export const LOGINURL = `${URL}/Authentication/Login`
 
