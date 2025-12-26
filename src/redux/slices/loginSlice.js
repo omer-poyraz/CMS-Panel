@@ -23,11 +23,18 @@ const loginSlice = createSlice({
                 state.status = 'loading';
             })
             .addCase(fetchLogin.fulfilled, (state, action) => {
-                if (action.payload.userId) {
+                console.log("burası")
+                console.log(action.payload.result)
+                if (action.payload.result.accessToken) {
+                    console.log("burası")
                     state.status = 'succeeded';
+                    console.log("burası")
                     state.data = action.payload;
+                    console.log("burası")
                     localStorage.setItem("auth", JSON.stringify(action.payload))
+                    console.log("burası")
                     toast.success(`Hoşgeldin ${action.payload.name}.`)
+                    console.log("burası")
                     setTimeout(() => {
                         window.location.href = "/"
                     }, 1000);

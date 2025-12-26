@@ -17,7 +17,11 @@ const LoginPage = () => {
 
     const onSubmit = async (e) => {
         setLoad(true)
-        await dispatch(fetchLogin({ username: e.username, password: e.password }))
+        var res = await dispatch(fetchLogin({ username: e.username, password: e.password }))
+        console.log(res)
+        // if (res.payload) {
+        //     window.location.href = "/"
+        // }
         setTimeout(() => { setLoad(false) }, 1000);
     }
 

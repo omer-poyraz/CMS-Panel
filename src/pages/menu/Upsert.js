@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { BButtonModel, CardModel, PButtonModel } from '../../utilities/Models'
-import { Button, Card, CardBody, CardHeader, Col, Form, Input, Row } from 'reactstrap'
+import { Button, Card, CardBody, CardHeader, Col, Form, Row } from 'reactstrap'
 import InputElement from '../../components/Input'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronDown, faChevronUp, faFile, faGlobeEurope, faList } from '@fortawesome/free-solid-svg-icons'
+import { faChevronDown, faFile, faGlobeEurope, faList } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { yupResolver } from "@hookform/resolvers/yup"
 import { useForm } from 'react-hook-form'
@@ -11,6 +11,7 @@ import { MenuSchema } from '../../utilities/Schemas'
 import { fetchHeaders } from '../../redux/slices/headersSlice'
 import SelectElement from '../../components/SelectElement'
 import FileElement from '../../components/FileElement'
+import LIBECMSEDITOR from 'libecms-editor';
 
 const Upsert = () => {
     const dispatch = useDispatch()
@@ -99,6 +100,13 @@ const Upsert = () => {
                                 errors={errors}
                                 label={`URL - ${lng}`}
                                 icon={<FontAwesomeIcon icon={faGlobeEurope} color='#c1beea' size='1x' />} />
+                        </Col>
+                        <Col md={12}>
+                            <LIBECMSEDITOR
+                                value={""}
+                                onChange={(content) => { console.log(content) }}
+                                defaultValue={"<p>Merhaba Dünya!</p>"}
+                            />
                         </Col>
                         <Col md={12} className='d-flex justify-content-end'>
                             <Button className={BButtonModel} onClick={() => setIsSave(true)}>Kaydet - {lng}</Button>

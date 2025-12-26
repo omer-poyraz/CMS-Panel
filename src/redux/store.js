@@ -17,6 +17,9 @@ import seoIdSlice from "./slices/seoIdSlice";
 import seoAddSlice from "./slices/seoAddSlice";
 import seoUpdateSlice from "./slices/seoUpdateSlice";
 import seoDeleteSlice from "./slices/seoDeleteSlice";
+import fullscreenReducer from './slices/fullscreenSlice'
+import previewReducer from './slices/previewSlice'
+import editorReducer from './slices/editorSlice'
 
 export const Store = configureStore({
     reducer: {
@@ -38,5 +41,8 @@ export const Store = configureStore({
         seoAdd: seoAddSlice,
         seoUpdate: seoUpdateSlice,
         seoDelete: seoDeleteSlice,
+        fullscreen: fullscreenReducer,
+        preview: previewReducer,
+        editor: editorReducer,
     }
 });
