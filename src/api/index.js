@@ -1,4 +1,4 @@
-export const URL = "https://localhost:7175/api"
+export const URL = process.env.REACT_APP_API_URL
 
 export const LOGINURL = `${URL}/Authentication/Login`
 
