@@ -1,16 +1,16 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { SeoGetService } from '../../service';
+import { MenuGetAllService } from '../../service';
 
-export const fetchSeoId = createAsyncThunk(
-    'seoId/fetchSeoId',
-    async ({ id }) => {
-        const response = await SeoGetService(id)
+export const fetchMenus = createAsyncThunk(
+    'menus/fetchMenus',
+    async ({ lang }) => {
+        const response = await MenuGetAllService(lang)
         return response.result;
     }
 );
 
-const seoIdSlice = createSlice({
-    name: 'seoId',
+const menusSlice = createSlice({
+    name: 'menus',
     initialState: {
         data: null,
         status: 'idle',
@@ -18,17 +18,17 @@ const seoIdSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(fetchSeoId.pending, (state) => {
+            .addCase(fetchMenus.pending, (state) => {
                 state.status = 'loading';
             })
-            .addCase(fetchSeoId.fulfilled, (state, action) => {
+            .addCase(fetchMenus.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 state.data = action.payload;
             })
-            .addCase(fetchSeoId.rejected, (state) => {
+            .addCase(fetchMenus.rejected, (state) => {
                 state.status = 'failed';
             });
     },
 });
 
-export default seoIdSlice.reducer;
+export default menusSlice.reducer;

@@ -88,13 +88,17 @@ body {
     color: #7367f0;
 }
 
-.card2 {
+.card2,
+.modal2.modal-content {
     background-color: #2f3349 !important;
 }
 
 .card2 h3,
 .card2 h4,
-.card2 h5 {
+.card2 h5,
+.modal2.modal-content h3,
+.modal2.modal-content h4,
+.modal2.modal-content h5 {
     color: #cfcde4;
 }
 
@@ -103,7 +107,8 @@ body {
 }
 
 .card span,
-.card2 span {
+.card2 span,
+.modal2.modal-content span {
     font-size: 14px;
 }
 
@@ -120,7 +125,17 @@ body {
 .card2 .ant-table-container,
 .card2 .ant-table-content,
 .card2 .ant-table-thead,
-.card2 .ant-table-tbody {
+.card2 .ant-table-tbody,
+.modal2.modal-content .ant-table-content,
+.modal2.modal-content .ant-table-thead,
+.modal2.modal-content .ant-table-tbody,
+.modal2.modal-content .ant-table,
+.modal2.modal-content .ant-table-container,
+.modal2.modal-content .ant-spin-container,
+.modal2.modal-content .ant-spin-nested-loading,
+.modal2.modal-content table,
+.modal2.modal-content table tr,
+.modal2.modal-content table tr th {
     background-color: #41455d !important;
     border: none !important;
     border-radius: 10px;
@@ -129,11 +144,14 @@ body {
 }
 
 .card2:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-tbody>tr>th,
-.card2:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-tbody>tr>td {
+.card2:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-tbody>tr>td,
+.modal2.modal-content:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-tbody>tr>th,
+.modal2.modal-content:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-tbody>tr>td {
     border-bottom: 1px solid #76778e;
 }
 
-.card2 .anticon svg {
+.card2 .anticon svg,
+.modal2.modal-content .anticon svg {
     color: #d4e6d1;
 }
 
@@ -142,18 +160,30 @@ body {
     background-color: transparent;
 }
 
+.error-text {
+    margin-top: -10px;
+    display: block;
+    margin-bottom: 16px;
+}
+
 .card2:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-thead>tr>th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before,
-.card2:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-thead>tr>td:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
+.card2:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-thead>tr>td:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before,
+.modal2.modal-content:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-thead>tr>th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before,
+.modal2.modal-content:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-thead>tr>td:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
     background-color: #797d93;
 }
 
-.card2:where(.css-dev-only-do-not-override-49qm).ant-empty-normal .ant-empty-description {
+.card2:where(.css-dev-only-do-not-override-49qm).ant-empty-normal .ant-empty-description,
+.modal2.modal-content:where(.css-dev-only-do-not-override-49qm).ant-empty-normal .ant-empty-description {
     color: white !important;
 }
 
 .card2:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-tbody>tr.ant-table-placeholder:hover>th,
 .card2:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-tbody>tr.ant-table-placeholder:hover>td,
-.card2:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-tbody>tr.ant-table-placeholder {
+.card2:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-tbody>tr.ant-table-placeholder,
+.modal2.modal-content:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-tbody>tr.ant-table-placeholder:hover>th,
+.modal2.modal-content:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-tbody>tr.ant-table-placeholder:hover>td,
+.modal2.modal-content:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-tbody>tr.ant-table-placeholder {
     background-color: #4c5065;
     color: #797d93;
 }
@@ -166,16 +196,24 @@ body {
 }
 
 .card2:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-tbody>tr>th,
-.card2:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-tbody>tr>td {
+.card2:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-tbody>tr>td,
+.modal2.modal-content:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-tbody>tr>th,
+.modal2.modal-content:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-tbody>tr>td {
     border: none;
 }
 
-.card2 .form-control {
+span.ant-select-selection-item {
+    padding-left: 20px !important;
+}
+
+.card2 .form-control,
+.modal2.modal-content .form-control {
     border: 0.5px solid #c1beea;
     color: #bbb9d7;
 }
 
-.card2 .input-element svg:first-child {
+.card2 .input-element svg:first-child,
+.modal2.modal-content .input-element svg:first-child {
     color: #c1beea;
 }
 
@@ -195,15 +233,22 @@ body {
     font-size: 13px;
 }
 
-.card2:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-tbody .ant-table-row>.ant-table-cell-row-hover {
+.roundedd {
+    border-radius: 50%;
+}
+
+.card2:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-tbody .ant-table-row>.ant-table-cell-row-hover,
+.modal2.modal-content:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-tbody .ant-table-row>.ant-table-cell-row-hover {
     background-color: #4c5065;
 }
 
-.card2.card2:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-tbody .ant-table-row>.ant-table-cell-row-hover:first-child {
+.card2.card2:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-tbody .ant-table-row>.ant-table-cell-row-hover:first-child,
+.modal2.modal-content.modal2.modal-content:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-tbody .ant-table-row>.ant-table-cell-row-hover:first-child {
     border-radius: 10px 0 0 10px;
 }
 
-.card2.card2:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-tbody .ant-table-row>.ant-table-cell-row-hover:last-child {
+.card2.card2:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-tbody .ant-table-row>.ant-table-cell-row-hover:last-child,
+.modal2.modal-content.modal2.modal-content:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-tbody .ant-table-row>.ant-table-cell-row-hover:last-child {
     border-radius: 0 10px 10px 0;
 }
 
@@ -290,6 +335,26 @@ input {
 
 .input-element input {
     padding-left: 35px;
+}
+
+.w30 {
+    width: 30px;
+}
+
+.w40 {
+    width: 40px;
+}
+
+.h30 {
+    height: 30px;
+}
+
+.h40 {
+    height: 40px;
+}
+
+.sort-item {
+    transition: all 0.25s ease;
 }
 
 .north {
@@ -495,6 +560,18 @@ input {
 }
 
 /* Setting END */
+
+:where(.css-dev-only-do-not-override-mncuj7).ant-select .ant-select-arrow .anticon>svg {
+    display: none;
+}
+
+.btn-close {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2367678e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'%3E%3C/line%3E%3Cline x1='6' y1='6' x2='18' y2='18'%3E%3C/line%3E%3C/svg%3E") center center no-repeat;
+    width: 30px;
+    height: 30px;
+    border: none;
+    cursor: pointer;
+}
 
 
 @media (max-width: 1032px) {

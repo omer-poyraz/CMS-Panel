@@ -1,5 +1,4 @@
 import { Select } from 'antd';
-import React from 'react'
 import { Controller } from 'react-hook-form';
 import { Container, FormGroup, Label } from 'reactstrap';
 
@@ -19,7 +18,7 @@ const SelectElement = ({ id, label, control, data, errors, icon, suffix }) => {
                                 {icon}
                                 <Select
                                     {...field}
-                                    id={id}
+                                    id={id ?? ""}
                                     value={field.value || null}
                                     options={data}
                                     className='w-100'

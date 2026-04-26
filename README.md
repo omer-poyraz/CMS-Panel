@@ -1,71 +1,141 @@
-# Getting Started with Create React App
+Example Page/Create
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+{
+  "translations": [
+    {
+      "lang": "tr",
+      "title": "Ana Sayfa",
+      "slug": "ana-sayfa",
+      "seoTitle": "Ana Sayfa - Şirket",
+      "seoDescription": "Şirket ana sayfa açıklaması"
+    },
+    {
+      "lang": "en",
+      "title": "Home",
+      "slug": "home",
+      "seoTitle": "Home - Company",
+      "seoDescription": "Company homepage description"
+    }
+  ],
+  "sections": [
+    {
+      "type": "hero",
+      "sort": 1,
+      "fields": [
+        { "lang": "tr", "key": "title", "value": "Hoşgeldiniz" },
+        { "lang": "en", "key": "title", "value": "Welcome" },
 
-## Available Scripts
+        { "lang": "tr", "key": "subtitle", "value": "Bizimle büyüyün" },
+        { "lang": "en", "key": "subtitle", "value": "Grow with us" },
 
-In the project directory, you can run:
+        { "lang": "tr", "key": "buttonText", "value": "İletişime Geç" },
+        { "lang": "en", "key": "buttonText", "value": "Contact Us" },
 
-### `npm start`
+        { "lang": "tr", "key": "image", "value": "/img/hero.jpg" }
+      ]
+    },
+    {
+      "type": "features",
+      "sort": 2,
+      "items": [
+        {
+          "sort": 1,
+          "fields": [
+            { "lang": "tr", "key": "title", "value": "Hızlı" },
+            { "lang": "en", "key": "title", "value": "Fast" },
+            { "lang": "tr", "key": "description", "value": "Çok hızlıyız" },
+            { "lang": "en", "key": "description", "value": "We are very fast" },
+            { "lang": "tr", "key": "icon", "value": "rocket" }
+          ]
+        },
+        {
+          "sort": 2,
+          "fields": [
+            { "lang": "tr", "key": "title", "value": "Güvenli" },
+            { "lang": "en", "key": "title", "value": "Secure" },
+            { "lang": "tr", "key": "description", "value": "Verileriniz güvende" },
+            { "lang": "en", "key": "description", "value": "Your data is safe" },
+            { "lang": "tr", "key": "icon", "value": "shield" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "slider",
+      "sort": 3,
+      "items": [
+        {
+          "sort": 1,
+          "fields": [
+            { "lang": "tr", "key": "title", "value": "Proje 1" },
+            { "lang": "en", "key": "title", "value": "Project 1" },
+            { "lang": "tr", "key": "image", "value": "/img/slide1.jpg" }
+          ]
+        },
+        {
+          "sort": 2,
+          "fields": [
+            { "lang": "tr", "key": "title", "value": "Proje 2" },
+            { "lang": "en", "key": "title", "value": "Project 2" },
+            { "lang": "tr", "key": "image", "value": "/img/slide2.jpg" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "about",
+      "sort": 4,
+      "fields": [
+        { "lang": "tr", "key": "title", "value": "Hakkımızda" },
+        { "lang": "en", "key": "title", "value": "About Us" },
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+        { "lang": "tr", "key": "content", "value": "<p>Biz güçlü bir ekibiz</p>" },
+        { "lang": "en", "key": "content", "value": "<p>We are a strong team</p>" },
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+        { "lang": "tr", "key": "image", "value": "/img/about.jpg" }
+      ]
+    },
+    {
+      "type": "testimonials",
+      "sort": 5,
+      "items": [
+        {
+          "sort": 1,
+          "fields": [
+            { "lang": "tr", "key": "name", "value": "Ahmet Yılmaz" },
+            { "lang": "en", "key": "name", "value": "John Doe" },
+            { "lang": "tr", "key": "comment", "value": "Harika hizmet!" },
+            { "lang": "en", "key": "comment", "value": "Great service!" },
+            { "lang": "tr", "key": "avatar", "value": "/img/user1.jpg" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "cta",
+      "sort": 6,
+      "fields": [
+        { "lang": "tr", "key": "title", "value": "Hemen Başla" },
+        { "lang": "en", "key": "title", "value": "Get Started" },
 
-### `npm test`
+        { "lang": "tr", "key": "buttonText", "value": "Kayıt Ol" },
+        { "lang": "en", "key": "buttonText", "value": "Sign Up" },
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+        { "lang": "tr", "key": "buttonLink", "value": "/register" }
+      ]
+    },
+    {
+      "type": "footer",
+      "sort": 7,
+      "fields": [
+        { "lang": "tr", "key": "copyright", "value": "© 2026 Tüm hakları saklıdır" },
+        { "lang": "en", "key": "copyright", "value": "© 2026 All rights reserved" },
 
-### `npm run build`
+        { "lang": "tr", "key": "address", "value": "İstanbul" },
+        { "lang": "en", "key": "address", "value": "Istanbul" },
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# Panel
+        { "lang": "tr", "key": "email", "value": "info@site.com" }
+      ]
+    }
+  ]
+}

@@ -1,20 +1,11 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { UserCreateService, UserUpdateService } from '../../service';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
+import { UserUpdateService } from '../../service';
 
 export const fetchUserEdit = createAsyncThunk(
     'userEdit/fetchUserEdit',
     async ({ data }) => {
-        var response;
-        const roles = []
-        roles.push("Admin")
-        if (data.userId) response = await UserUpdateService(data)
-        else {
-            console.log(data)
-            data["roles"] = roles
-            console.log(data)
-            response = await UserCreateService(data)
-        }
+        var response = await UserUpdateService(data)
         return response.result;
     }
 );
@@ -34,11 +25,11 @@ const userEditSlice = createSlice({
             .addCase(fetchUserEdit.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 state.data = action.payload;
-                toast.success("İçerik başarıyla oluşturuldu.")
+                toast.success("Kullanıcı güncelleme başarıyla tamamlandı.")
             })
             .addCase(fetchUserEdit.rejected, (state) => {
                 state.status = 'failed';
-                toast.error("İçerik oluşuturulurken bir sorun oluştu!")
+                toast.error("Kullanıcı güncellenirken bir sorun oluştu!")
             });
     },
 });

@@ -1,8 +1,7 @@
-import React from 'react';
 import { Controller } from 'react-hook-form';
-import { FormGroup, Input, Label, Container } from 'reactstrap';
+import { Container, FormGroup, Input, Label } from 'reactstrap';
 
-const InputElement = ({ control, errors, label, icon, type, placeholder, id, suffix, value }) => {
+const InputElement = ({ control, errors, label, icon, type, placeholder, id, suffix, value, onChangeExtra, className }) => {
     return (
         <FormGroup>
             <Label className="text-secondary mb-0" htmlFor={id}>
@@ -19,10 +18,14 @@ const InputElement = ({ control, errors, label, icon, type, placeholder, id, suf
                                 <Input
                                     {...field}
                                     id={id}
-                                    value={field.value || value || ""}
-                                    className={errors[id] ? "bg-transparent border-danger border-1" : "bg-transparent"}
+                                    value={field.value ?? ""}
+                                    className={`${className} ${errors ? "bg-transparent border-danger border-1" : "bg-transparent"}`}
                                     type={type}
                                     placeholder={placeholder}
+                                    onChange={(e) => {
+                                        field.onChange(e)
+                                        onChangeExtra && onChangeExtra(e.target.value)
+                                    }}
                                 />
                                 {suffix}
                             </div>
@@ -30,8 +33,8 @@ const InputElement = ({ control, errors, label, icon, type, placeholder, id, suf
                     );
                 }}
             />
-            {errors[id] && (
-                <small className="ml-1 text-danger">{errors[id].message}</small>
+            {errors && (
+                <small className="ml-1 text-danger">{errors}</small>
             )}
         </FormGroup>
     );

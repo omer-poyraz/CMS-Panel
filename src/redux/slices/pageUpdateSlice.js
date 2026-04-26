@@ -1,17 +1,17 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { SeoUpdateService } from '../../service';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
+import { PageUpdateService } from '../../service';
 
-export const fetchSeoUpdate = createAsyncThunk(
-    'seoUpdate/fetchSeoUpdate',
+export const fetchPageUpdate = createAsyncThunk(
+    'pageUpdate/fetchPageUpdate',
     async ({ data }) => {
-        const response = await SeoUpdateService(data)
+        const response = await PageUpdateService(data)
         return response.result;
     }
 );
 
-const seoUpdateSlice = createSlice({
-    name: 'seoUpdate',
+const pageUpdateSlice = createSlice({
+    name: 'pageUpdate',
     initialState: {
         data: null,
         status: 'idle',
@@ -19,19 +19,19 @@ const seoUpdateSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(fetchSeoUpdate.pending, (state) => {
+            .addCase(fetchPageUpdate.pending, (state) => {
                 state.status = 'loading';
             })
-            .addCase(fetchSeoUpdate.fulfilled, (state, action) => {
+            .addCase(fetchPageUpdate.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 state.data = action.payload;
                 toast.success("İçerik başarıyla güncellendi.")
             })
-            .addCase(fetchSeoUpdate.rejected, (state) => {
+            .addCase(fetchPageUpdate.rejected, (state) => {
                 state.status = 'failed';
                 toast.error("İçerik güncellenirken bir sorun oluştu!")
             });
     },
 });
 
-export default seoUpdateSlice.reducer;
+export default pageUpdateSlice.reducer;

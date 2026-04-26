@@ -1,17 +1,17 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { HeaderGetService } from '../../service';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
+import { MenuGroupDeleteService } from '../../service';
 
-export const fetchHeaderDelete = createAsyncThunk(
-    'headerDelete/fetchHeaderDelete',
+export const fetchMenuGroupDelete = createAsyncThunk(
+    'menuGroupDelete/fetchMenuGroupDelete',
     async ({ id }) => {
-        const response = await HeaderGetService(id)
+        const response = await MenuGroupDeleteService(id)
         return response.result;
     }
 );
 
-const headerDeleteSlice = createSlice({
-    name: 'headerDelete',
+const menuGroupDeleteSlice = createSlice({
+    name: 'menuGroupDelete',
     initialState: {
         data: null,
         status: 'idle',
@@ -19,19 +19,19 @@ const headerDeleteSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(fetchHeaderDelete.pending, (state) => {
+            .addCase(fetchMenuGroupDelete.pending, (state) => {
                 state.status = 'loading';
             })
-            .addCase(fetchHeaderDelete.fulfilled, (state, action) => {
+            .addCase(fetchMenuGroupDelete.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 state.data = action.payload;
                 toast.success("Başlık başarıyla silindi.")
             })
-            .addCase(fetchHeaderDelete.rejected, (state) => {
+            .addCase(fetchMenuGroupDelete.rejected, (state) => {
                 state.status = 'failed';
                 toast.error("Başlık silme işlemi sırasında bir sorun oluştu!")
             });
     },
 });
 
-export default headerDeleteSlice.reducer;
+export default menuGroupDeleteSlice.reducer;

@@ -1,25 +1,34 @@
 import { configureStore } from "@reduxjs/toolkit";
-import loginSlice from "./slices/loginSlice";
-import openMenuSlice from "./slices/openMenuSlice";
-import themeSlice from "./slices/themeSlice";
+import editorReducer from './slices/editorSlice';
+import fullscreenReducer from './slices/fullscreenSlice';
 import langSlice from "./slices/langSlice";
-import userSlice from "./slices/userSlice";
+import loginSlice from "./slices/loginSlice";
+import menuCreateSlice from "./slices/menuCreateSlice";
+import menuDeleteSlice from "./slices/menuDeleteSlice";
+import menuGroupCreateSlice from "./slices/menuGroupCreateSlice";
+import menuGroupDeleteSlice from "./slices/menuGroupDeleteSlice";
+import menuGroupIdSlice from "./slices/menuGroupIdSlice";
+import menuGroupsSlice from "./slices/menuGroupsSlice";
+import menuGroupUpdateSlice from "./slices/menuGroupUpdateSlice";
+import menuIdSlice from "./slices/menuIdSlice";
+import menusByGroupSlice from "./slices/menusByGroupSlice";
+import menusSlice from "./slices/menusSlice";
+import menuUpdateSlice from "./slices/menuUpdateSlice";
+import openMenuSlice from "./slices/openMenuSlice";
+import pageCreateSlice from "./slices/pageCreateSlice";
+import pageDeleteSlice from "./slices/pageDeleteSlice";
+import pageIdSlice from "./slices/pageIdSlice";
+import pageSlugSlice from "./slices/pageSlugSlice";
+import pagesSlice from "./slices/pagesSlice";
+import pageUpdateSlice from "./slices/pageUpdateSlice";
+import previewReducer from './slices/previewSlice';
+import themeSlice from "./slices/themeSlice";
+import userDeleteSlice from "./slices/userDeleteSlice";
+import userEditSlice from "./slices/userEditSlice";
 import userIdSlice from "./slices/userIdSlice";
+import userSlice from "./slices/userSlice";
 import usersSlice from "./slices/usersSlice";
 import userUpdateSlice from "./slices/userUpdateSlice";
-import userEditSlice from "./slices/userEditSlice";
-import userDeleteSlice from "./slices/userDeleteSlice";
-import headersSlice from "./slices/headersSlice";
-import headerIdSlice from "./slices/headerIdSlice";
-import headerDeleteSlice from "./slices/headerDeleteSlice";
-import seosSlice from "./slices/seosSlice";
-import seoIdSlice from "./slices/seoIdSlice";
-import seoAddSlice from "./slices/seoAddSlice";
-import seoUpdateSlice from "./slices/seoUpdateSlice";
-import seoDeleteSlice from "./slices/seoDeleteSlice";
-import fullscreenReducer from './slices/fullscreenSlice'
-import previewReducer from './slices/previewSlice'
-import editorReducer from './slices/editorSlice'
 
 export const Store = configureStore({
     reducer: {
@@ -33,14 +42,23 @@ export const Store = configureStore({
         userUpdate: userUpdateSlice,
         userEdit: userEditSlice,
         userDelete: userDeleteSlice,
-        headers: headersSlice,
-        headerId: headerIdSlice,
-        headerDelete: headerDeleteSlice,
-        seos: seosSlice,
-        seoId: seoIdSlice,
-        seoAdd: seoAddSlice,
-        seoUpdate: seoUpdateSlice,
-        seoDelete: seoDeleteSlice,
+        menus: menusSlice,
+        menusByGroup: menusByGroupSlice,
+        menuId: menuIdSlice,
+        menuDelete: menuDeleteSlice,
+        menuCreate: menuCreateSlice,
+        menuUpdate: menuUpdateSlice,
+        menuGroups: menuGroupsSlice,
+        menuGroupId: menuGroupIdSlice,
+        menuGroupDelete: menuGroupDeleteSlice,
+        menuGroupCreate: menuGroupCreateSlice,
+        menuGroupUpdate: menuGroupUpdateSlice,
+        pages: pagesSlice,
+        pageId: pageIdSlice,
+        pageSlug: pageSlugSlice,
+        pageCreate: pageCreateSlice,
+        pageUpdate: pageUpdateSlice,
+        pageDelete: pageDeleteSlice,
         fullscreen: fullscreenReducer,
         preview: previewReducer,
         editor: editorReducer,

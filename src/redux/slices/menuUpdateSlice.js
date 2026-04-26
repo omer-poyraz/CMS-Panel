@@ -1,16 +1,16 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { UserUpdateService } from '../../service';
+import { MenuUpdateService } from '../../service';
 
-export const fetchUserUpdate = createAsyncThunk(
-    'userUpdate/fetchUserUpdate',
+export const fetchMenuUpdate = createAsyncThunk(
+    'menuUpdate/fetchMenuUpdate',
     async ({ data }) => {
-        const response = await UserUpdateService(data)
+        const response = await MenuUpdateService(data)
         return response.result;
     }
 );
 
-const userUpdateSlice = createSlice({
-    name: 'userUpdate',
+const menuUpdateSlice = createSlice({
+    name: 'menuUpdate',
     initialState: {
         data: null,
         status: 'idle',
@@ -18,17 +18,17 @@ const userUpdateSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(fetchUserUpdate.pending, (state) => {
+            .addCase(fetchMenuUpdate.pending, (state) => {
                 state.status = 'loading';
             })
-            .addCase(fetchUserUpdate.fulfilled, (state, action) => {
+            .addCase(fetchMenuUpdate.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 state.data = action.payload;
             })
-            .addCase(fetchUserUpdate.rejected, (state) => {
+            .addCase(fetchMenuUpdate.rejected, (state) => {
                 state.status = 'failed';
             });
     },
 });
 
-export default userUpdateSlice.reducer;
+export default menuUpdateSlice.reducer;

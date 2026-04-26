@@ -1,116 +1,194 @@
-import { useEffect, useState } from 'react'
-import { BButtonModel, CardModel, PButtonModel } from '../../utilities/Models'
-import { Button, Card, CardBody, CardHeader, Col, Form, Row } from 'reactstrap'
-import InputElement from '../../components/Input'
+import { faChevronDown, faList } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronDown, faFile, faGlobeEurope, faList } from '@fortawesome/free-solid-svg-icons'
-import { useDispatch, useSelector } from 'react-redux'
 import { yupResolver } from "@hookform/resolvers/yup"
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { MenuSchema } from '../../utilities/Schemas'
-import { fetchHeaders } from '../../redux/slices/headersSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
+import { Button, Card, CardBody, Col, Form, Row } from 'reactstrap'
+import InputElement from '../../components/Input'
+import Language from '../../components/Language'
 import SelectElement from '../../components/SelectElement'
-import FileElement from '../../components/FileElement'
-import LIBECMSEDITOR from 'libecms-editor';
+import SwitchElement from '../../components/SwitchElement'
+import { fetchMenuCreate } from '../../redux/slices/menuCreateSlice'
+import { fetchMenuUpdate } from '../../redux/slices/menuUpdateSlice'
+import { fetchMenusByGroup } from '../../redux/slices/menusByGroupSlice'
+import { fetchMenus } from '../../redux/slices/menusSlice'
+import { CardModel, PButtonModel } from '../../utilities/Models'
+import { MenuSchema } from '../../utilities/Schemas'
 
-const Upsert = () => {
+const Upsert = ({ setModal, id, data, isUpdate }) => {
     const dispatch = useDispatch()
-    const [isSave, setIsSave] = useState(false)
-    const [menus, setMenus] = useState({})
-    const { handleSubmit, reset, formState: { errors }, control } = useForm({ resolver: yupResolver(MenuSchema), })
     const theme = useSelector((state) => state.theme.theme)
-    const data = useSelector((state) => state.headers.data)
-    const header = useSelector((state) => state.headerId.data)
+    const [menuOptions, setMenuOptions] = useState([])
+    const menu = useSelector((state) => state.menuId.data)
     const lng = useSelector((state) => state.lang.lang)
-
-    const getData = async () => {
-        if (data) {
-            var newlist = []
-            for (var i = 0; i < data.length; i++) {
-                newlist.push({ value: data[i].headerID, label: data[i].titleTR })
-            }
-            setMenus(newlist)
+    const { handleSubmit, reset, formState: { errors }, control, setValue, watch } = useForm({
+        resolver: yupResolver(MenuSchema),
+        defaultValues: {
+            menuGroupID: id,
+            parentMenuID: null,
+            translations: [
+                { id: null, lang: "TR", title: "", slug: "", active: true },
+                { id: null, lang: "EN", title: "", slug: "", active: true },
+            ],
+            sort: null,
+            activeLangTitle: "",
+            activeLangSlug: "",
+            activeLangActive: true
         }
-    }
+    })
+    const currentTranslations = watch("translations") || []
 
-    const onSubmit = (e) => {
-        if (isSave) {
-            console.log(e)
-        } else {
-            setIsSave(false)
+    const onSubmit = async (form) => {
+        try {
+            const payload = {
+                menuGroupID: parseInt(id),
+                parentMenuID: parseInt(form?.parentMenuID),
+                translations: form?.translations.filter(t => t.title && t.title.trim() !== "" && t.slug && t.slug.trim() !== "" && t.lang && t.active !== undefined) || [],
+            }
+
+            let res
+
+            if (menu?.id) {
+                payload.id = menu.id
+                res = await dispatch(fetchMenuUpdate({ data: payload }))
+            } else {
+                res = await dispatch(fetchMenuCreate({ data: payload }))
+            }
+            await dispatch(fetchMenusByGroup({ id: id, lang: lng }))
+
+            if (res?.payload?.id) {
+                dispatch(fetchMenus({ lang: lng }))
+            }
+            setModal(false)
+        } catch (error) {
+            toast.error("Hata: " + error)
         }
     }
 
     useEffect(() => {
-        dispatch(fetchHeaders())
+        if (!isUpdate) {
+            reset({
+                menuGroupID: id,
+                parentMenuID: null,
+                translations: [
+                    { id: null, lang: "TR", title: "", slug: "", active: true },
+                    { id: null, lang: "EN", title: "", slug: "", active: true },
+                ],
+                sort: null,
+                activeLangTitle: "",
+                activeLangSlug: "",
+                activeLangActive: true
+            });
+        }
+    }, [isUpdate]);
+
+    useEffect(() => {
+        const getData = async () => {
+            let menuList = []
+            data?.forEach(element => {
+                menuList.push({ value: element?.id, label: element?.translations[0]?.title })
+            });
+            setMenuOptions(menuList)
+        }
         getData()
-    }, [dispatch])
+    }, [data])
+
+    useEffect(() => {
+        if (menu?.id) {
+            setValue("translations", menu.translations.map(t => ({ id: t.id, lang: t.lang, title: t.title, slug: t.slug, active: t.active })))
+            const activeTranslation = currentTranslations.find(
+                t => t.lang.toLowerCase() === lng.toLowerCase()
+            )
+            setValue("activeLangTitle", activeTranslation ? activeTranslation.title : "")
+            setValue("activeLangSlug", activeTranslation ? activeTranslation.slug : "")
+            setValue("activeLangActive", activeTranslation ? activeTranslation.active : true)
+        }
+    }, [menu])
+
+    useEffect(() => {
+        const currentTranslations = watch("translations") || []
+        const activeTranslation = currentTranslations.find(
+            t => t.lang.toLowerCase() === lng.toLowerCase()
+        )
+        setValue("activeLangTitle", activeTranslation ? activeTranslation.title : "")
+        setValue("activeLangSlug", activeTranslation ? activeTranslation.slug : "")
+        setValue("activeLangActive", activeTranslation ? activeTranslation.active : true)
+    }, [lng, menu])
 
     return (
         <Card className={CardModel(theme)}>
-            <CardHeader className='bg-transparent border-0'>
-                <div><h5>Menü {header ? "Güncelle" : "Ekle"}</h5></div>
-                <div className='subtitle'><span className='text-s'>Menü elemanlarını ekleyebilir veya düzenleyebilirsiniz.</span></div>
-            </CardHeader>
             <CardBody>
+                <Language />
                 <Form onSubmit={handleSubmit(onSubmit)}>
                     <Row>
-                        <Col md={6}>
-                            <FileElement
-                                id="file"
-                                label="Logo"
+                        <Col md={12}>
+                            <InputElement
+                                id="activeLangTitle"
+                                type="text"
+                                className='mb-0'
                                 control={control}
-                                errors={errors}
-                                icon={<FontAwesomeIcon icon={faFile} color='#c1beea' size='1x' />}
+                                errors={errors.translations?.[0]?.title?.message}
+                                label={`Başlık (${lng})`}
+                                icon={<FontAwesomeIcon icon={faList} color='#c1beea' size='1x' />}
+                                value={watch("activeLangTitle")}
+                                onChangeExtra={(value) => {
+                                    const currentTranslations = watch("translations") || []
+                                    const updatedTranslations = currentTranslations.map(t => t.lang === lng ? { ...t, title: value } : t)
+                                    setValue("translations", updatedTranslations)
+                                    setValue("activeLangTitle", value)
+                                }}
                             />
                         </Col>
-                        <Col md={6}>
-                            <SelectElement
-                                id="ParentHeaderID"
-                                label="Üst Başlık"
+                        <Col md={12}>
+                            <InputElement
+                                id="activeLangSlug"
+                                type="text"
+                                className='mb-0'
                                 control={control}
-                                data={menus}
-                                errors={errors}
+                                errors={errors.translations?.[0]?.slug?.message}
+                                label={`Slug (${lng})`}
                                 icon={<FontAwesomeIcon icon={faList} color='#c1beea' size='1x' />}
-                                suffix={<FontAwesomeIcon icon={faChevronDown} color='#c1beea' size='1x' />} />
-                        </Col>
-                        <Col md={4}>
-                            <InputElement
-                                id="TitleTR"
-                                type="text"
-                                control={control}
-                                errors={errors}
-                                label={`Başlık - ${lng}`}
-                                icon={<FontAwesomeIcon icon={faList} color='#c1beea' size='1x' />} />
-                        </Col>
-                        <Col md={4}>
-                            <InputElement
-                                id="LongTitleTR"
-                                type="text"
-                                control={control}
-                                errors={errors}
-                                label={`Uzun Başlık - ${lng}`}
-                                icon={<FontAwesomeIcon icon={faList} color='#c1beea' size='1x' />} />
-                        </Col>
-                        <Col md={4}>
-                            <InputElement
-                                id="UrlTR"
-                                type="text"
-                                control={control}
-                                errors={errors}
-                                label={`URL - ${lng}`}
-                                icon={<FontAwesomeIcon icon={faGlobeEurope} color='#c1beea' size='1x' />} />
+                                value={watch("activeLangSlug")}
+                                onChangeExtra={(value) => {
+                                    const currentTranslations = watch("translations") || []
+                                    const updatedTranslations = currentTranslations.map(t => t.lang === lng ? { ...t, slug: value } : t)
+                                    setValue("translations", updatedTranslations)
+                                    setValue("activeLangSlug", value)
+                                }}
+                            />
                         </Col>
                         <Col md={12}>
-                            <LIBECMSEDITOR
-                                value={""}
-                                onChange={(content) => { console.log(content) }}
-                                defaultValue={"<p>Merhaba Dünya!</p>"}
+                            <SelectElement
+                                id="parentMenuID"
+                                label="Üst Menü"
+                                control={control}
+                                icon={<FontAwesomeIcon icon={faList} color='#c1beea' size='1x' />}
+                                suffix={<FontAwesomeIcon icon={faChevronDown} color='#c1beea' size='1x' />}
+                                data={menuOptions}
+                                errors={errors}
+                            />
+                        </Col>
+                        <Col md={12}>
+                            <SwitchElement
+                                id="activeLangActive"
+                                control={control}
+                                errors={errors}
+                                label={`Aktif (${lng})`}
+                                checkedChildren="Aktif"
+                                unCheckedChildren="Pasif"
+                                value={watch("activeLangActive")}
+                                onChangeExtra={(checked) => {
+                                    const currentTranslations = watch("translations") || []
+                                    const updatedTranslations = currentTranslations.map(t => t.lang === lng ? { ...t, active: checked } : t)
+                                    setValue("translations", updatedTranslations)
+                                    setValue("activeLangActive", checked)
+                                }}
                             />
                         </Col>
                         <Col md={12} className='d-flex justify-content-end'>
-                            <Button className={BButtonModel} onClick={() => setIsSave(true)}>Kaydet - {lng}</Button>
-                            <Button className={PButtonModel} type='submit'>{header ? "Güncelle" : "Ekle"}</Button>
+                            <Button className={PButtonModel} type='submit'>{menu ? "Güncelle" : "Ekle"}</Button>
                         </Col>
                     </Row>
                 </Form>

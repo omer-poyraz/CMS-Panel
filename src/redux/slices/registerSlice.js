@@ -1,17 +1,17 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import { LoginService } from '../../service';
+import { RegisterService } from '../../service';
 
-export const fetchLogin = createAsyncThunk(
-    'login/fetchLogin',
-    async ({ username, password }) => {
-        const response = await LoginService(username, password)
+export const fetchRegister = createAsyncThunk(
+    'register/fetchRegister',
+    async ({ data }) => {
+        const response = await RegisterService(data)
         return response;
     }
 );
 
-const loginSlice = createSlice({
-    name: 'login',
+const registerSlice = createSlice({
+    name: 'register',
     initialState: {
         data: null,
         status: 'idle',
@@ -19,10 +19,10 @@ const loginSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(fetchLogin.pending, (state) => {
+            .addCase(fetchRegister.pending, (state) => {
                 state.status = 'loading';
             })
-            .addCase(fetchLogin.fulfilled, (state, action) => {
+            .addCase(fetchRegister.fulfilled, (state, action) => {
                 if (action.payload && action.payload?.result?.accessToken) {
                     state.status = 'succeeded';
                     state.data = action.payload;
@@ -30,10 +30,10 @@ const loginSlice = createSlice({
                     toast.success(`Hoşgeldin ${action.payload?.result?.user?.normalizedUserName?.toString().replace("-", " ")}.`)
                 }
             })
-            .addCase(fetchLogin.rejected, (state) => {
+            .addCase(fetchRegister.rejected, (state) => {
                 state.status = 'failed';
             });
     },
 });
 
-export default loginSlice.reducer;
+export default registerSlice.reducer;

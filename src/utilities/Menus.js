@@ -1,6 +1,7 @@
 export const fetchMenu = (url) => {
     if (url === "/") return "Dashboard"
-    if (url === "/menu") return "Menü Yönetimi"
+    if (url === "/menu-group") return "Menü Yönetimi"
+    if (url.startsWith("/menu/")) return "Menü Yönetimi"
     if (url === "/file") return "Dosya Yönetimi"
     if (url === "/form") return "Form Yönetimi"
     if (url === "/orders") return "Sipariş Yönetimi"

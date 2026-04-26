@@ -13,11 +13,32 @@ export const AuthSchema = yup.object({
 }).required();
 
 export const MenuSchema = yup.object({
-    file: yup.string().notRequired(),
-    TitleTR: yup.string().required("Bu alan zorunludur!"),
-    LongTitleTR: yup.string().required("Bu alan zorunludur!"),
-    UrlTR: yup.string().required("Bu alan zorunludur!"),
-    ParentHeaderID: yup.string().notRequired(),
+    menuGroupID: yup.number().required("Menü grubu zorunlu!"),
+    parentMenuID: yup.number().nullable(),
+    translations: yup.array().of(
+        yup.object({
+            id: yup.number().nullable(),
+            lang: yup.string().required("Dil zorunlu!"),
+            title: yup.string().required("Başlık zorunlu!"),
+            slug: yup.string().required("Slug zorunlu!"),
+            active: yup.boolean().required()
+        })
+    ).min(1, "En az bir çeviri gerekli!"),
+    sort: yup.number().nullable(),
+    activeLangTitle: yup.string().notRequired(),
+    activeLangSlug: yup.string().notRequired(),
+    activeLangActive: yup.boolean().notRequired()
+});
+
+export const MenuGroupSchema = yup.object({
+    translations: yup.array().of(
+        yup.object({
+            id: yup.number().nullable(),
+            lang: yup.string().required("Dil zorunlu!"),
+            title: yup.string().required("Başlık zorunlu!"),
+        })
+    ).min(1, "En az bir çeviri gerekli!"),
+    activeLangTitle: yup.string().notRequired()
 });
 
 export const UserSchema = yup.object({
