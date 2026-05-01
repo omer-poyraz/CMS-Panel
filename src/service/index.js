@@ -15,10 +15,10 @@ axios.interceptors.response.use(
             } else if (error.response.status === 401) {
                 let auth = JSON.parse(sessionStorage.getItem("auth"));
                 try {
-                    let newTokens = await RefreshTokenService(auth.accessToken, auth.refreshToken);
+                    let newTokens = await RefreshTokenService(auth.result.accessToken, auth.result.refreshToken);
                     if (newTokens) {
-                        auth.accessToken = newTokens.accessToken;
-                        auth.refreshToken = newTokens.refreshToken;
+                        auth.result.accessToken = newTokens.accessToken;
+                        auth.result.refreshToken = newTokens.refreshToken;
                         sessionStorage.setItem("auth", JSON.stringify(auth));
                         window.location.reload();
                     }
@@ -36,7 +36,6 @@ axios.interceptors.response.use(
         return Promise.reject(error);
     }
 );
-
 
 // AUTHENTICATION
 export async function LoginService(username, password) {

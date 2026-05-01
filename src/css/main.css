@@ -166,6 +166,30 @@ body {
     margin-bottom: 16px;
 }
 
+.bg-dark :where(.css-dev-only-do-not-override-mncuj7).ant-tabs .ant-tabs-tab-btn {
+    color: #f7f7f7 !important;
+}
+
+.bg-dark :where(.css-dev-only-do-not-override-mncuj7).ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: #7367f0 !important;
+}
+
+.bg-dark .anticon svg {
+    color: #f7f7f7 !important;
+}
+
+:where(.css-dev-only-do-not-override-mncuj7).ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: #7367f0 !important;
+}
+
+:where(.css-dev-only-do-not-override-mncuj7).ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn:hover {
+    color: #7367f0 !important;
+}
+
+.ant-tabs-tab:hover {
+    color: #7367f0 !important;
+}
+
 .card2:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-thead>tr>th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before,
 .card2:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-thead>tr>td:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before,
 .modal2.modal-content:where(.css-dev-only-do-not-override-49qm).ant-table-wrapper .ant-table-thead>tr>th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before,
