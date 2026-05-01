@@ -1,6 +1,5 @@
-import React from 'react'
-import North from '../../components/North'
 import { Col, Row } from 'reactstrap'
+import North from '../../components/North'
 import UserCard from '../../components/UserCard'
 import UserUpdate from './UserUpdate'
 

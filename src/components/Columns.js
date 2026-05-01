@@ -18,7 +18,6 @@ import { randomColor } from "./General";
 export const MenuColumns = (setUpsert, setIsUpdate) => {
     const lng = useSelector((state) => state.lang.lang)
     const dispatch = useDispatch()
-    const navigate = useNavigate()
 
     return [
         {

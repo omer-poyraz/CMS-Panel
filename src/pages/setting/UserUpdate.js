@@ -1,22 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import { Button, Card, CardBody, CardHeader } from 'reactstrap'
-import { CardHModel, CardModel, EndModel, PButtonModel } from '../../utilities/Models'
-import { useDispatch, useSelector } from 'react-redux'
-import InputElement from '../../components/Input'
+import { useEffect, useState } from 'react'
 import { Key, Mail, Phone, User } from 'react-feather'
-import { fetchUserUpdate } from '../../redux/slices/userUpdateSlice'
-import { fetchUser } from '../../redux/slices/userSlice'
+import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
+import { Button, Card, CardBody, CardHeader } from 'reactstrap'
+import InputElement from '../../components/Input'
+import { fetchUser } from '../../redux/slices/userSlice'
+import { fetchUserUpdate } from '../../redux/slices/userUpdateSlice'
+import { CardHModel, CardModel, EndModel, PButtonModel } from '../../utilities/Models'
 
 const UserUpdate = () => {
     const dispatch = useDispatch()
     const theme = useSelector((state) => state.theme.theme)
     const user = useSelector((state) => state.user.data)
     const [formData, setFormData] = useState({ firstName: "", lastName: "", userName: "", email: "", phoneNumber: "" })
-
-    const getData = () => {
-        setFormData({ firstName: user.firstName, lastName: user.lastName, userName: user.userName, email: user.email, phoneNumber: user.phoneNumber })
-    }
 
     const Update = async () => {
         var data = await dispatch(fetchUserUpdate({ firstName: formData.firstName, lastName: formData.lastName, userName: formData.userName, email: formData.email, phoneNumber: formData.phoneNumber }))
@@ -34,7 +30,7 @@ const UserUpdate = () => {
 
     useEffect(() => {
         if (user)
-            getData();
+            setFormData({ firstName: user.firstName, lastName: user.lastName, userName: user.userName, email: user.email, phoneNumber: user.phoneNumber })
     }, [user]);
 
     return (

@@ -10,7 +10,6 @@ import Upsert from './Upsert'
 const UserPage = () => {
     const data = useSelector((state) => state.users.data)
     const theme = useSelector((state) => state.theme.theme)
-    const lng = useSelector((state) => state.lang.lang)
     const [upsertModal, setUpsertModal] = useState(false)
     const [isUpdate, setIsUpdate] = useState(false)
     const dispatch = useDispatch()

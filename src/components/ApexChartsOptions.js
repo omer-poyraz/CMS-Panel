@@ -54,7 +54,7 @@ export const radarChartOptions = {
     },
 };
 
-export const series = ({data}) => [
+export const series = ({ data }) => [
     {
         name: 'Sales',
         colors: ["#7367f0", "#7367f0", "#7367f0", "#7367f0", "#7367f0", "#7367f0"],

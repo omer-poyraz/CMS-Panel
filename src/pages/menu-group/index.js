@@ -6,7 +6,6 @@ import North from '../../components/North'
 import Table from '../../components/Table'
 import { fetchMenuGroups } from '../../redux/slices/menuGroupsSlice'
 import { TargetColumn } from '../../utilities/TargetColumn'
-import Sort from './Sort'
 import Upsert from './Upsert'
 
 const MenuGroupPage = () => {
@@ -39,7 +38,6 @@ const MenuGroupPage = () => {
                     <Upsert setModal={setUpsertModal} />
                 </ModalBody>
             </Modal>
-            <Sort />
         </North>
     )
 }

@@ -1,10 +1,9 @@
-import React from 'react'
-import Header from './Header'
-import Footer from './Footer'
-import Navbar from './Navbar'
 import { motion } from 'framer-motion'
-import { NorthVariant } from './Animation'
 import { useSelector } from 'react-redux'
+import { NorthVariant } from './Animation'
+import Footer from './Footer'
+import Header from './Header'
+import Navbar from './Navbar'
 
 const North = ({ children }) => {
     const theme = useSelector((state) => state.theme.theme)

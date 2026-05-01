@@ -2,6 +2,7 @@ export const URL = process.env.REACT_APP_API_URL
 
 export const LOGINURL = `${URL}/Authentication/Login`
 export const REGISTERURL = `${URL}/Authentication/Register`
+export const REFRESHTOKENURL = `${URL}/Authentication/Refresh`
 
 export const MENUGROUPGETALLURL = `${URL}/MenuGroup/GetAll`
 export const MENUGROUPGETURL = `${URL}/MenuGroup/Get`

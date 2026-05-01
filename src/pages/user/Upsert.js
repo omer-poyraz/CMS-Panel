@@ -1,7 +1,7 @@
 import { faEnvelope, faPhone, faUser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
@@ -16,15 +16,11 @@ import { UserSchema } from '../../utilities/Schemas'
 
 const Upsert = ({ setModal, isUpdate }) => {
     const dispatch = useDispatch()
-    const [isSave, setIsSave] = useState(false)
-    const [users, setUsers] = useState({})
     const { handleSubmit, reset, formState: { errors }, control, setValue, watch } = useForm({
         resolver: yupResolver(UserSchema),
         defaultValues: { userId: null, firstName: "", lastName: "", email: "", phoneNumber: "", password: "" }
     })
-    const [formData, setFormData] = useState({})
     const theme = useSelector((state) => state.theme.theme)
-    const data = useSelector((state) => state.users.data)
     const user = useSelector((state) => state.userId.data)
 
     const onSubmit = async (form) => {
@@ -63,7 +59,7 @@ const Upsert = ({ setModal, isUpdate }) => {
             }
             clear();
         }
-    }, [isUpdate]);
+    }, [isUpdate, dispatch, reset]);
 
     useEffect(() => {
         if (user?.userId) {
@@ -73,7 +69,7 @@ const Upsert = ({ setModal, isUpdate }) => {
             setValue("email", user.email)
             setValue("phoneNumber", user.phoneNumber)
         }
-    }, [user])
+    }, [user, setValue])
 
     return (
         <Card className={CardModel(theme)}>

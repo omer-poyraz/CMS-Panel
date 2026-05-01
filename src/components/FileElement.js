@@ -1,6 +1,5 @@
-import React from 'react';
 import { Controller } from 'react-hook-form';
-import { FormGroup, Input, Label, Container } from 'reactstrap';
+import { Container, FormGroup, Input, Label } from 'reactstrap';
 
 const FileElement = ({ control, errors, label, icon, placeholder, id, value }) => {
     return (

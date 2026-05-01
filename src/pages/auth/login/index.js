@@ -50,7 +50,7 @@ const LoginPage = () => {
                                 control={control}
                                 errors={errors.username?.message}
                                 label={`Kullanıcı Adı`}
-                                icon={<FontAwesomeIcon icon={faUser} color='#c1beea' size='1x' />}
+                                icon={<FontAwesomeIcon icon={faUser} color='#c1beea' size='xxl' />}
                                 value={watch("username")}
                                 onChangeExtra={(value) => {
                                     setValue("username", value)

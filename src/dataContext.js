@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
+import { createContext, useEffect, useState } from 'react';
 
 const DataContext = createContext();
 
@@ -6,15 +6,15 @@ export const DataContextProvider = ({ children }) => {
   const [authData, setAuthData] = useState(null);
 
   useEffect(() => {
-    const storedData = localStorage.getItem('auth');
+    const storedData = sessionStorage.getItem('auth');
     if (storedData) {
       setAuthData(JSON.parse(storedData));
     }
-  }, []); // [] içinde dependency array olmadığı için sadece bir kez çalışır
+  }, []);
 
   const updateAuthData = (newData) => {
     setAuthData(newData);
-    localStorage.setItem('auth', JSON.stringify(newData));
+    sessionStorage.setItem('auth', JSON.stringify(newData));
   };
 
   return (

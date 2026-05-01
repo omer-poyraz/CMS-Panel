@@ -1,10 +1,9 @@
-import React from 'react'
-import { BrowserRouter as Router } from "react-router-dom"
+import { BrowserRouter as Router } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import './css/main.css';
+import { DataContextProvider } from './dataContext';
 import AnimatedRoutes from './router';
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-import './css/main.css'
-import { DataContextProvider } from './dataContext'
 
 const App = () => {
   return (

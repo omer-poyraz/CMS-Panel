@@ -1,28 +1,28 @@
-import React, { useEffect, useState } from 'react'
-import img from '../images/profile.png'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRightFromBracket, faBars } from '@fortawesome/free-solid-svg-icons'
-import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap'
-import { toast } from 'react-toastify'
-import { useLocation, useNavigate } from 'react-router-dom'
-import { fetchMenu } from '../utilities/Menus'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useEffect, useState } from 'react'
+import { Moon, Sun } from 'react-feather'
 import { useDispatch, useSelector } from 'react-redux'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap'
+import img from '../images/profile.png'
 import { changeOpenMenu } from '../redux/slices/openMenuSlice'
 import { changeTheme } from '../redux/slices/themeSlice'
-import { Moon, Sun } from 'react-feather'
+import { fetchMenu } from '../utilities/Menus'
 
 const Header = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const location = useLocation()
-    const name = localStorage.getItem("auth") ? JSON.parse(localStorage.getItem("auth")).name : "North Soft"
+    const name = sessionStorage.getItem("auth") ? JSON.parse(sessionStorage.getItem("auth")).name : "North Soft"
     const theme = useSelector((state) => state.theme.theme)
     const [header, setHeader] = useState("")
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const toggle = () => setDropdownOpen((prevState) => !prevState);
 
     const logout = () => {
-        localStorage.clear()
+        sessionStorage.clear()
         toast.success("Çıkış yapıldı.")
         setTimeout(() => {
             navigate("/login")

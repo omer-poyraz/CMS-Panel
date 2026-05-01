@@ -1,9 +1,8 @@
-import React from 'react'
 import ReactApexChart from 'react-apexcharts'
 import { useSelector } from 'react-redux'
 import { Card, CardBody, CardHeader } from 'reactstrap'
-import { lineChartOptions, series } from '../ApexChartsOptions'
 import { CardModel } from '../../utilities/Models'
+import { lineChartOptions, series } from '../ApexChartsOptions'
 
 const ClickCart = ({ title, description, data }) => {
     const theme = useSelector((state) => state.theme.theme)

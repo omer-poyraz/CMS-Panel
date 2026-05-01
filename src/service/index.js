@@ -1,9 +1,41 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-import { LOGINURL, MENUCREATEURL, MENUDELETEURL, MENUGETALLBYGROUPURL, MENUGETALLURL, MENUGETURL, MENUGROUPCREATEURL, MENUGROUPDELETEURL, MENUGROUPGETALLURL, MENUGROUPGETURL, MENUGROUPUPDATEURL, MENUSORTURL, MENUUPDATEURL, PAGECREATEURL, PAGEDELETEURL, PAGEGETALLURL, PAGEGETSLUGURL, PAGEGETURL, PAGEUPDATEURL, REGISTERURL, USERDELETEURL, USERGETALLURL, USERGETURL, USERUPDATEURL } from "../api";
+import { LOGINURL, MENUCREATEURL, MENUDELETEURL, MENUGETALLBYGROUPURL, MENUGETALLURL, MENUGETURL, MENUGROUPCREATEURL, MENUGROUPDELETEURL, MENUGROUPGETALLURL, MENUGROUPGETURL, MENUGROUPUPDATEURL, MENUSORTURL, MENUUPDATEURL, PAGECREATEURL, PAGEDELETEURL, PAGEGETALLURL, PAGEGETSLUGURL, PAGEGETURL, PAGEUPDATEURL, REFRESHTOKENURL, REGISTERURL, USERDELETEURL, USERGETALLURL, USERGETURL, USERUPDATEURL } from "../api";
 
-const token = localStorage.getItem("auth") !== undefined && localStorage.getItem("auth") !== null ? JSON.parse(localStorage.getItem("auth")).accessToken : null
+const token = sessionStorage.getItem("auth") !== undefined && sessionStorage.getItem("auth") !== null ? JSON.parse(sessionStorage.getItem("auth")).accessToken : null
 const header = { headers: { "Authorization": `Bearer ${token}` } }
+
+// SETTINGS
+axios.interceptors.response.use(
+    response => response,
+    async error => {
+        if (error.response) {
+            if (error.response.status === 403) {
+                toast.error("Yetkiniz yok");
+            } else if (error.response.status === 401) {
+                let auth = JSON.parse(sessionStorage.getItem("auth"));
+                try {
+                    let newTokens = await RefreshTokenService(auth.accessToken, auth.refreshToken);
+                    if (newTokens) {
+                        auth.accessToken = newTokens.accessToken;
+                        auth.refreshToken = newTokens.refreshToken;
+                        sessionStorage.setItem("auth", JSON.stringify(auth));
+                        window.location.reload();
+                    }
+                } catch (e) {
+                    toast.error("Oturum süresi dolmuş");
+                    window.location.href = "/login";
+                }
+            } else {
+                toast.error("Bir hata oluştu");
+            }
+        } else {
+            toast.error("Sunucuya ulaşılamadı");
+        }
+
+        return Promise.reject(error);
+    }
+);
 
 
 // AUTHENTICATION
@@ -21,6 +53,19 @@ export async function RegisterService(data) {
     return await axios.post(REGISTERURL, data, header)
         .then(res => res.data)
         .catch(er => toast.error("Kayıt sırasında bir sorun oluştu!"))
+}
+
+export async function RefreshTokenService(accessToken, refreshToken) {
+    const data = {
+        accessToken: accessToken,
+        refreshToken: refreshToken
+    };
+    return await axios.post(REFRESHTOKENURL, data)
+        .then(res => res.data)
+        .catch(er => {
+            toast.error("Oturum yenileme başarısız!");
+            throw er;
+        });
 }
 // AUTHENTICATION END
 

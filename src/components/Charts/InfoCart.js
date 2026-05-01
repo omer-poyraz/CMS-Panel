@@ -1,5 +1,4 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
 import { ChevronDown, ChevronUp } from 'react-feather'
 import { useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'

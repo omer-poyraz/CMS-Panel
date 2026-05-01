@@ -26,7 +26,7 @@ const loginSlice = createSlice({
                 if (action.payload && action.payload?.result?.accessToken) {
                     state.status = 'succeeded';
                     state.data = action.payload;
-                    localStorage.setItem("auth", JSON.stringify(action.payload?.result))
+                    sessionStorage.setItem("auth", JSON.stringify(action.payload?.result))
                     toast.success(`Hoşgeldin ${action.payload?.result?.user?.normalizedUserName?.toString().replace("-", " ")}.`)
                 }
             })

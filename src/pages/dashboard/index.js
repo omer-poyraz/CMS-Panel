@@ -1,9 +1,8 @@
-import React from 'react'
-import North from '../../components/North'
-import { Col, Row } from 'reactstrap'
+import { faDollar, faMessage, faTableCells, faUser } from '@fortawesome/free-solid-svg-icons';
+import { Col, Row } from 'reactstrap';
 import ClickCart from '../../components/Charts/ClickCart';
 import InfoCart from '../../components/Charts/InfoCart';
-import { faDollar, faMessage, faMinus, faTableCells, faUser } from '@fortawesome/free-solid-svg-icons';
+import North from '../../components/North';
 
 const DashboardPage = () => {
     return (

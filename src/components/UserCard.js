@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Card, CardBody, Col, Row } from 'reactstrap'
 import img from '../images/profile.png'
-import { CardModel, StartModel } from '../utilities/Models'
-import { useDispatch, useSelector } from 'react-redux'
 import { fetchUser } from '../redux/slices/userSlice'
+import { CardModel, StartModel } from '../utilities/Models'
 
 const UserCard = () => {
     const dispatch = useDispatch()

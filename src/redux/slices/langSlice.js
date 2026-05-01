@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    lang: localStorage.getItem("lang") !== null && localStorage.getItem("lang") !== undefined
-        ? localStorage.getItem("lang")
+    lang: sessionStorage.getItem("lang") !== null && sessionStorage.getItem("lang") !== undefined
+        ? sessionStorage.getItem("lang")
         : "TR"
 };
 
@@ -11,7 +11,7 @@ export const langSlice = createSlice({
     initialState,
     reducers: {
         changeLang: (state, action) => {
-            localStorage.setItem("lang", action.payload);
+            sessionStorage.setItem("lang", action.payload);
             state.lang = action.payload;
         },
     },

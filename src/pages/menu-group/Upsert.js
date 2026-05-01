@@ -1,7 +1,7 @@
 import { faList } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
@@ -16,9 +16,7 @@ import { MenuGroupSchema } from '../../utilities/Schemas'
 
 const Upsert = ({ setModal }) => {
     const dispatch = useDispatch()
-    const [isSave, setIsSave] = useState(false)
-    const [menuGroups, setMenuGroups] = useState({})
-    const { handleSubmit, reset, formState: { errors }, control, setValue, watch } = useForm({
+    const { handleSubmit, formState: { errors }, control, setValue, watch } = useForm({
         resolver: yupResolver(MenuGroupSchema),
         defaultValues: {
             translations: [
@@ -28,12 +26,9 @@ const Upsert = ({ setModal }) => {
             activeLangTitle: ""
         }
     })
-    const [formData, setFormData] = useState({})
     const theme = useSelector((state) => state.theme.theme)
-    const data = useSelector((state) => state.menuGroups.data)
     const menuGroup = useSelector((state) => state.menuGroupId.data)
     const lng = useSelector((state) => state.lang.lang)
-    const currentTranslations = watch("translations") || []
 
     const onSubmit = async (form) => {
         try {
@@ -60,6 +55,7 @@ const Upsert = ({ setModal }) => {
     }
 
     useEffect(() => {
+        const currentTranslations = watch("translations") || []
         if (menuGroup?.id) {
             setValue("translations", menuGroup.translations.map(t => ({ id: t.id, lang: t.lang, title: t.title })))
             const activeTranslation = currentTranslations.find(
@@ -67,7 +63,7 @@ const Upsert = ({ setModal }) => {
             )
             setValue("activeLangTitle", activeTranslation ? activeTranslation.title : "")
         }
-    }, [menuGroup])
+    }, [menuGroup, setValue, lng, watch])
 
     useEffect(() => {
         const currentTranslations = watch("translations") || []
@@ -75,7 +71,7 @@ const Upsert = ({ setModal }) => {
             t => t.lang.toLowerCase() === lng.toLowerCase()
         )
         setValue("activeLangTitle", activeTranslation ? activeTranslation.title : "")
-    }, [lng, menuGroup])
+    }, [lng, menuGroup, setValue, watch])
 
     return (
         <Card className={CardModel(theme)}>

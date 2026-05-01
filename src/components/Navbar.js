@@ -16,10 +16,17 @@ const Navbar = () => {
     const path = window.location.pathname
 
     useEffect(() => {
-        if (window.innerWidth > 1032) {
-            dispatch(changeOpenMenu(true))
+        const handleResize = () => {
+            if (window.innerWidth > 1032) {
+                dispatch(changeOpenMenu(true))
+            }
         }
-    }, [window.innerWidth, dispatch])
+
+        handleResize()
+
+        window.addEventListener("resize", handleResize)
+        return () => window.removeEventListener("resize", handleResize)
+    }, [dispatch])
 
     return (
         open ? <div className='north-left'>
@@ -35,22 +42,6 @@ const Navbar = () => {
                     <div><FontAwesomeIcon icon={faList} /></div>
                     <div className='ml-2'><span>Menü Yönetimi</span></div>
                 </Link>
-                {/* <Link to="/file" className={path === "/file" ? 'item active' : "item"}>
-                    <div><FontAwesomeIcon icon={faFileText} /></div>
-                    <div className='ml-2'><span>Dosya Yönetimi</span></div>
-                </Link> */}
-                {/* <Link to="/image" className={path === "/image" ? 'item active' : "item"}>
-                    <div><FontAwesomeIcon icon={faImage} /></div>
-                    <div className='ml-2'><span>Resim Yönetimi</span></div>
-                </Link> */}
-                {/* <Link to="/product" className={path === "/product" ? 'item active' : "item"}>
-                    <div><FontAwesomeIcon icon={faStore} /></div>
-                    <div className='ml-2'><span>Ürün Yönetimi</span></div>
-                </Link>
-                <Link to="/orders" className={path === "/orders" ? 'item active' : "item"}>
-                    <div><FontAwesomeIcon icon={faSort} /></div>
-                    <div className='ml-2'><span>Sipariş Yönetimi</span></div>
-                </Link> */}
                 <Link to="/user" className={path === "/user" ? 'item active' : "item"}>
                     <div><FontAwesomeIcon icon={faUserCircle} /></div>
                     <div className='ml-2'><span>Kullanıcı Yönetimi</span></div>
@@ -62,11 +53,11 @@ const Navbar = () => {
                     <div><FontAwesomeIcon icon={faGear} /></div>
                     <div className='ml-2'><span>Ayarlar</span></div>
                 </Link>
-                <a href="https://www.google.com" target='_blank' className="item">
+                <a href="https://www.google.com" target='_blank' rel='noopener noreferrer' className="item">
                     <div><FontAwesomeIcon icon={faGlobeAsia} /></div>
                     <div className='ml-2'><span>Siteye Git</span></div>
                 </a>
-                <a href="https://www.google.com" target='_blank' className="item">
+                <a href="https://www.google.com" target='_blank' rel='noopener noreferrer' className="item">
                     <div><FontAwesomeIcon icon={faFeather} /></div>
                     <div className='ml-2'><span>North Soft</span></div>
                 </a>

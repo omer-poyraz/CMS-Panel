@@ -38,7 +38,6 @@ const Upsert = ({ setModal, id, data, isUpdate }) => {
             activeLangActive: true
         }
     })
-    const currentTranslations = watch("translations") || []
 
     const onSubmit = async (form) => {
         try {
@@ -82,7 +81,7 @@ const Upsert = ({ setModal, id, data, isUpdate }) => {
                 activeLangActive: true
             });
         }
-    }, [isUpdate]);
+    }, [isUpdate, reset, id]);
 
     useEffect(() => {
         const getData = async () => {
@@ -97,15 +96,25 @@ const Upsert = ({ setModal, id, data, isUpdate }) => {
 
     useEffect(() => {
         if (menu?.id) {
-            setValue("translations", menu.translations.map(t => ({ id: t.id, lang: t.lang, title: t.title, slug: t.slug, active: t.active })))
-            const activeTranslation = currentTranslations.find(
+            const newTranslations = menu.translations.map(t => ({
+                id: t.id,
+                lang: t.lang,
+                title: t.title,
+                slug: t.slug,
+                active: t.active
+            }))
+
+            setValue("translations", newTranslations)
+
+            const activeTranslation = newTranslations.find(
                 t => t.lang.toLowerCase() === lng.toLowerCase()
             )
+
             setValue("activeLangTitle", activeTranslation ? activeTranslation.title : "")
             setValue("activeLangSlug", activeTranslation ? activeTranslation.slug : "")
             setValue("activeLangActive", activeTranslation ? activeTranslation.active : true)
         }
-    }, [menu])
+    }, [menu, setValue, lng])
 
     useEffect(() => {
         const currentTranslations = watch("translations") || []
@@ -115,7 +124,7 @@ const Upsert = ({ setModal, id, data, isUpdate }) => {
         setValue("activeLangTitle", activeTranslation ? activeTranslation.title : "")
         setValue("activeLangSlug", activeTranslation ? activeTranslation.slug : "")
         setValue("activeLangActive", activeTranslation ? activeTranslation.active : true)
-    }, [lng, menu])
+    }, [lng, menu, setValue, watch])
 
     return (
         <Card className={CardModel(theme)}>

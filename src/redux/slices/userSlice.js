@@ -1,10 +1,10 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { UserGetService } from '../../service';
 
 export const fetchUser = createAsyncThunk(
     'user/fetchUser',
     async () => {
-        var userId = JSON.parse(localStorage.getItem("auth")).userId
+        var userId = JSON.parse(sessionStorage.getItem("auth")).userId
         const response = await UserGetService(userId)
         return response.result;
     }

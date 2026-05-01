@@ -1,6 +1,6 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { UserDeleteService } from '../../service';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
+import { UserDeleteService } from '../../service';
 
 export const fetchUserDelete = createAsyncThunk(
     'userDelete/fetchUserDelete',
