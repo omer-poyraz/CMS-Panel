@@ -83,15 +83,15 @@ const Sort = ({ id, data, lang }) => {
                             layout
                             transition={{ duration: 0.25 }}
                         >
-                            <Card key={item.id || item.sort} className={`mb-1 shadow sort-item ${theme ? 'card2' : ''}`}>
+                            <Card key={item.id || item.sort} className={`mb-2 sort-item ${theme ? 'card2' : ''}`}>
                                 <CardBody className='d-flex justify-content-between'>
                                     <div className='d-flex justify-content-start align-items-center'>
-                                        <div className='border roundedd w40 h40'>
-                                            <h5 className='w-100 h-100 d-block d-flex justify-content-center align-items-center'>{item?.id}</h5>
+                                        <div className='w40 h40'>
+                                            <h6 className='w-100 text-s mb-1 h-100 d-block d-flex justify-content-center align-items-center'>{item?.id}</h6>
                                         </div>
-                                        <div className='ml-2'>
+                                        <div className='ml-2 d-flex justify-content-start align-items-start'>
                                             <h5>{item?.translations?.find(t => t.lang === lang)?.title || ''}</h5>
-                                            <small className='text-secondary'>{item?.translations?.find(t => t.lang === lang)?.slug}</small>
+                                            <small className='ml-3 mt-1 text-secondary'>({item?.translations?.find(t => t.lang === lang)?.slug})</small>
                                         </div>
                                     </div>
                                     <div className='d-flex justify-content-end align-items-center'>

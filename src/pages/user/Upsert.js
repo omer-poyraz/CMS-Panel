@@ -1,4 +1,4 @@
-import { faEnvelope, faPhone, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope, faLock, faPhone, faUser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useEffect } from 'react'
@@ -32,6 +32,8 @@ const Upsert = ({ setModal, isUpdate }) => {
                 phoneNumber: form.phoneNumber,
                 password: form.password
             }
+
+            console.log(payload)
 
             let res
 
@@ -118,6 +120,20 @@ const Upsert = ({ setModal, isUpdate }) => {
                                 }}
                             />
                         </Col>
+                        {!isUpdate ? <Col md={12}>
+                            <InputElement
+                                id="password"
+                                type="password"
+                                control={control}
+                                errors={errors.password?.message}
+                                label={`Şifre`}
+                                icon={<FontAwesomeIcon icon={faLock} color='#c1beea' size='1x' />}
+                                value={watch("password")}
+                                onChangeExtra={(value) => {
+                                    setValue("password", value)
+                                }}
+                            />
+                        </Col> : null}
                         <Col md={12}>
                             <InputElement
                                 id="phoneNumber"

@@ -1,6 +1,7 @@
 import { faEye, faEyeSlash, faLock, faUser } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { yupResolver } from "@hookform/resolvers/yup"
+import axios from "axios"
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
@@ -23,7 +24,11 @@ const LoginPage = () => {
         setLoad(true)
         var res = await dispatch(fetchLogin({ username: e.username, password: e.password }))
         if (res.payload?.result?.accessToken && res.payload?.result?.isAdmin === 1) {
-            navigate("/")
+            const token = res.payload.result.accessToken;
+            sessionStorage.setItem("auth", JSON.stringify(res.payload.result));
+            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+            toast.success(`Hoşgeldin ${res.payload.result.user?.normalizedUserName?.toString().replace("-", " ")}.`);
+            navigate("/");
         } else {
             toast.error("Giriş başarısız. Lütfen bilgilerinizi kontrol edin.")
         }
@@ -50,7 +55,7 @@ const LoginPage = () => {
                                 control={control}
                                 errors={errors.username?.message}
                                 label={`Kullanıcı Adı`}
-                                icon={<FontAwesomeIcon icon={faUser} color='#c1beea' size='xxl' />}
+                                icon={<FontAwesomeIcon icon={faUser} color='#c1beea' size='1x' />}
                                 value={watch("username")}
                                 onChangeExtra={(value) => {
                                     setValue("username", value)

@@ -1,10 +1,11 @@
 import { Tabs } from 'antd'
-import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Card, CardBody } from 'reactstrap'
 import North from '../../components/North'
+import { fetchSettings } from '../../redux/slices/settingsSlice'
 import ContactSettings from './contact'
 import ContractSettings from './contract'
-import GeneralSettings from './general'
 import LanguageSettings from './language'
 import LocationSettings from './location'
 import LogoSettings from './logo'
@@ -14,17 +15,26 @@ import ThemeSettings from './theme'
 
 const SettingsPage = () => {
     const theme = useSelector((state) => state.theme.theme)
+    const lng = useSelector((state) => state.lang.lang)
+    const settings = useSelector((state) => state.settings.data)
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        const getData = async () => {
+            await dispatch(fetchSettings({ lang: lng }))
+        }
+        getData()
+    }, [dispatch, lng])
 
     const tabs = [
-        { key: 1, label: "Genel Ayarlar", children: <GeneralSettings /> },
-        { key: 2, label: "Dil Ayarları", children: <LanguageSettings /> },
-        { key: 3, label: "Logo Ayarları", children: <LogoSettings /> },
-        { key: 4, label: "Tema Ayarları", children: <ThemeSettings /> },
-        { key: 5, label: "Sözleşme Ayarları", children: <ContractSettings /> },
-        { key: 6, label: "İletişim Ayarları", children: <ContactSettings /> },
-        { key: 7, label: "Lokasyon Ayarları", children: <LocationSettings /> },
-        { key: 8, label: "Referans Ayarları", children: <ReferenceSettings /> },
-        { key: 9, label: "Sosyal Medya Ayarları", children: <SocialMediaSettings /> },
+        { key: 1, label: "Dil Ayarları", children: <LanguageSettings /> },
+        { key: 2, label: "Logo Ayarları", children: <LogoSettings settings={settings} /> },
+        { key: 3, label: "Tema Ayarları", children: <ThemeSettings settings={settings} /> },
+        { key: 4, label: "Sözleşme Ayarları", children: <ContractSettings /> },
+        { key: 5, label: "İletişim Ayarları", children: <ContactSettings /> },
+        { key: 6, label: "Lokasyon Ayarları", children: <LocationSettings /> },
+        { key: 7, label: "Referans Ayarları", children: <ReferenceSettings /> },
+        { key: 8, label: "Sosyal Medya Ayarları", children: <SocialMediaSettings /> },
     ]
 
     return (

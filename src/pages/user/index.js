@@ -32,7 +32,7 @@ const UserPage = () => {
                 setIsUpdate={setIsUpdate}
             />
             <Modal isOpen={upsertModal} toggle={() => setUpsertModal(!upsertModal)} size='lg' centered className={`${theme ? 'modal2' : ''}`}>
-                <ModalHeader toggle={() => setUpsertModal(!upsertModal)}>{isUpdate ? "Menü Güncelle" : "Menü Ekle"}</ModalHeader>
+                <ModalHeader toggle={() => setUpsertModal(!upsertModal)}>{isUpdate ? "Kullanıcı Güncelle" : "Kullanıcı Ekle"}</ModalHeader>
                 <ModalBody>
                     <Upsert setModal={setUpsertModal} isUpdate={isUpdate} />
                 </ModalBody>

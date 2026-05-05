@@ -41,11 +41,23 @@ export const MenuGroupSchema = yup.object({
     activeLangTitle: yup.string().notRequired()
 });
 
+export const LanguageSchema = yup.object({
+    translations: yup.array().of(
+        yup.object({
+            id: yup.number().nullable(),
+            title: yup.string().required("Başlık zorunlu!"),
+            code: yup.string().required("Kod zorunlu!"),
+            lang: yup.string().required("Dil zorunlu!"),
+        })
+    ).min(1, "En az bir çeviri gerekli!"),
+    activeLangTitle: yup.string().notRequired(),
+    activeLangCode: yup.string().notRequired()
+});
+
 export const UserSchema = yup.object({
     firstName: yup.string().required("Bu alan zorunludur!"),
     lastName: yup.string().required("Bu alan zorunludur!"),
-    userName: yup.string().required("Bu alan zorunludur!"),
     email: yup.string().required("Bu alan zorunludur!"),
     phoneNumber: yup.string().required("Bu alan zorunludur!"),
-    password: yup.string().notRequired(),
+    password: yup.string().required("Bu alan zorunludur!"),
 }).required();

@@ -1,5 +1,5 @@
 import { Table as Table2 } from 'antd'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Card, CardBody, CardHeader } from 'reactstrap'
 import { clearMenuId } from '../redux/slices/menuIdSlice'
@@ -10,6 +10,44 @@ const Table = ({ title, description, id, column, data, modal, setModal, setIsUpd
     const theme = useSelector((state) => state.theme.theme)
     const [loading, setLoading] = useState(false)
     const dispatch = useDispatch()
+    const generatedRowKeysRef = useRef(new WeakMap())
+    const generatedRowKeyCounterRef = useRef(0)
+
+    const getGeneratedRowKey = (record) => {
+        if (record && typeof record === 'object') {
+            const existingKey = generatedRowKeysRef.current.get(record)
+
+            if (existingKey) {
+                return existingKey
+            }
+
+            generatedRowKeyCounterRef.current += 1
+            const newKey = `generated-row-${generatedRowKeyCounterRef.current}`
+            generatedRowKeysRef.current.set(record, newKey)
+
+            return newKey
+        }
+
+        generatedRowKeyCounterRef.current += 1
+        return `generated-row-primitive-${generatedRowKeyCounterRef.current}`
+    }
+
+    const resolveRowKey = (record) => {
+        const primaryKey = typeof id === 'string' ? id : 'id'
+        const normalizedKey = primaryKey.replace(/ID$/, 'Id')
+        const lowercaseFirstKey = normalizedKey.charAt(0).toLowerCase() + normalizedKey.slice(1)
+        const candidates = [primaryKey, normalizedKey, lowercaseFirstKey, 'id', 'ID']
+
+        for (const candidate of candidates) {
+            const value = record?.[candidate]
+
+            if (value !== undefined && value !== null && value !== '') {
+                return String(value)
+            }
+        }
+
+        return getGeneratedRowKey(record)
+    }
 
     useEffect(() => {
         setTimeout(() => {
@@ -44,7 +82,7 @@ const Table = ({ title, description, id, column, data, modal, setModal, setIsUpd
                     <Table2
                         bordered
                         className={theme ? 'card2 bg-dark h-100' : 'h-100'}
-                        rowKey={(record) => String(record[id.replace('ID', 'id')])}
+                        rowKey={resolveRowKey}
                         dataSource={data}
                         columns={column}
                         locale={LocaleMessage}

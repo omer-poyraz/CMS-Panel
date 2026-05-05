@@ -4,6 +4,14 @@ export const LOGINURL = `${URL}/Authentication/Login`
 export const REGISTERURL = `${URL}/Authentication/Register`
 export const REFRESHTOKENURL = `${URL}/Authentication/Refresh`
 
+export const FILECREATEURL = `${URL}/File/Create`
+
+export const LANGUAGEGETALLURL = `${URL}/Language/GetAll`
+export const LANGUAGEGETURL = `${URL}/Language/Get`
+export const LANGUAGECREATEURL = `${URL}/Language/Create`
+export const LANGUAGEUPDATEURL = `${URL}/Language/Update`
+export const LANGUAGEDELETEURL = `${URL}/Language/Delete`
+
 export const MENUGROUPGETALLURL = `${URL}/MenuGroup/GetAll`
 export const MENUGROUPGETURL = `${URL}/MenuGroup/Get`
 export const MENUGROUPCREATEURL = `${URL}/MenuGroup/Create`
@@ -24,6 +32,9 @@ export const PAGEGETSLUGURL = `${URL}/Page/GetSlug`
 export const PAGECREATEURL = `${URL}/Page/Create`
 export const PAGEUPDATEURL = `${URL}/Page/Update`
 export const PAGEDELETEURL = `${URL}/Page/Delete`
+
+export const SETTINGSGETURL = `${URL}/Settings/Get`
+export const SETTINGSUPDATEURL = `${URL}/Settings/Update`
 
 export const USERGETALLURL = `${URL}/User/GetAll`
 export const USERGETURL = `${URL}/User/Get`

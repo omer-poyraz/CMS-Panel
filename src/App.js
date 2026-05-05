@@ -1,3 +1,4 @@
+import axios from "axios";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -6,6 +7,11 @@ import { DataContextProvider } from './dataContext';
 import AnimatedRoutes from './router';
 
 const App = () => {
+  const auth = JSON.parse(sessionStorage.getItem("auth"));
+  if (auth?.accessToken) {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${auth.accessToken}`;
+  }
+
   return (
     <DataContextProvider>
       <Router future={{ v7_relativeSplatPath: true, v7_startTransition: true }}>

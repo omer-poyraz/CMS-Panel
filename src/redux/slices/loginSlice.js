@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { toast } from 'react-toastify';
 import { LoginService } from '../../service';
 
 export const fetchLogin = createAsyncThunk(
@@ -27,7 +26,6 @@ const loginSlice = createSlice({
                     state.status = 'succeeded';
                     state.data = action.payload;
                     sessionStorage.setItem("auth", JSON.stringify(action.payload?.result))
-                    toast.success(`Hoşgeldin ${action.payload?.result?.user?.normalizedUserName?.toString().replace("-", " ")}.`)
                 }
             })
             .addCase(fetchLogin.rejected, (state) => {

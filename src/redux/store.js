@@ -2,6 +2,11 @@ import { configureStore } from "@reduxjs/toolkit";
 import editorReducer from './slices/editorSlice';
 import fullscreenReducer from './slices/fullscreenSlice';
 import langSlice from "./slices/langSlice";
+import languageCreateSlice from "./slices/languageCreateSlice";
+import languageDeleteSlice from "./slices/languageDeleteSlice";
+import languageIdSlice from "./slices/languageIdSlice";
+import languagesSlice from "./slices/languagesSlice";
+import languageUpdateSlice from "./slices/languageUpdateSlice";
 import loginSlice from "./slices/loginSlice";
 import menuCreateSlice from "./slices/menuCreateSlice";
 import menuDeleteSlice from "./slices/menuDeleteSlice";
@@ -22,6 +27,8 @@ import pageSlugSlice from "./slices/pageSlugSlice";
 import pagesSlice from "./slices/pagesSlice";
 import pageUpdateSlice from "./slices/pageUpdateSlice";
 import previewReducer from './slices/previewSlice';
+import settingsSlice from "./slices/settingsSlice";
+import settingsUpdateSlice from "./slices/settingsUpdateSlice";
 import themeSlice from "./slices/themeSlice";
 import userDeleteSlice from "./slices/userDeleteSlice";
 import userEditSlice from "./slices/userEditSlice";
@@ -42,6 +49,11 @@ export const Store = configureStore({
         userUpdate: userUpdateSlice,
         userEdit: userEditSlice,
         userDelete: userDeleteSlice,
+        languages: languagesSlice,
+        languageCreate: languageCreateSlice,
+        languageId: languageIdSlice,
+        languageUpdate: languageUpdateSlice,
+        languageDelete: languageDeleteSlice,
         menus: menusSlice,
         menusByGroup: menusByGroupSlice,
         menuId: menuIdSlice,
@@ -59,6 +71,8 @@ export const Store = configureStore({
         pageCreate: pageCreateSlice,
         pageUpdate: pageUpdateSlice,
         pageDelete: pageDeleteSlice,
+        settings: settingsSlice,
+        settingsUpdate: settingsUpdateSlice,
         fullscreen: fullscreenReducer,
         preview: previewReducer,
         editor: editorReducer,
